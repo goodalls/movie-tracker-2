@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Card from '../Card/Card';
 import { connect } from 'react-redux';
 
-export const MovieIndex = ({ moviesData }) => {
-  console.log(moviesData);
+
+export const MovieIndex = (props) => {
+  console.log(props);
   // const elements = movies.map((movie, index)=>{
   //   return <Card title={movie.title} poster={movie.poster} key={index}/>
   // })
@@ -12,7 +13,7 @@ export const MovieIndex = ({ moviesData }) => {
 };
 
 const mapStateToProps = store => {
-  moviesData: store.moviesData;
+  movieData: store.movieData;
 };
 
 export default connect(mapStateToProps)(MovieIndex);

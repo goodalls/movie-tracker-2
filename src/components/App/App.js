@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
-
-import Header from './Header/Header';
-import { MovieIndex } from './Movies/MovieIndex';
-import api from '../apiCalls';
+import { MovieIndex } from '../Movies/MovieIndex';
+import { addMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
-import { addMovies } from '../actions/actions';
+import Header from '../Header/Header';
+import api from '../../apiCalls';
+import './App.css';
 
 class App extends Component {
   constructor() {
