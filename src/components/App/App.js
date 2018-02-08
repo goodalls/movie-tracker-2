@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import  MovieIndex  from '../Movies/MovieIndex';
 import { addMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom'
+
 import Header from '../Header/Header';
+import MovieIndex from '../Movies/MovieIndex';
+import User from '../User/User';
+
 import api from '../../apiCalls';
 import './App.css';
 
@@ -27,7 +31,8 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <MovieIndex />
+        <Route exact path='/' component={MovieIndex} />
+        <Route exact path='/user' component={User} /> 
       </div>
     );
   }
