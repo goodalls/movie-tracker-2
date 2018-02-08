@@ -1,10 +1,10 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import MovieIndex from '../components/Movies/MovieIndex';
 
-const mapStateToProps = state => {
-  return {
-    moviesData: state.movieData
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     moviesData: state.movieData
+//   };
+// };
 
-export default connect(mapStateToProps)(MovieIndex);
+// export default connect(mapStateToProps, null)(MovieIndex);

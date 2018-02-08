@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Card from '../Card/Card';
+import { connect } from 'react-redux';
 
 
-const MovieIndex = ({moviesData}) => {
-  console.log(moviesData);
-  // const elements = movies.map((movie, index)=>{
-  //   return <Card title={movie.title} poster={movie.poster} key={index}/>
-  // })
+export class MovieIndex extends Component {
 
-  return <div>hello</div>;
+movieCards = () => {
+  const { moviesData} = this.props
+  return moviesData.map((movie, index)=>{
+    return <Card title={movie.title} poster={movie.poster} key={index}/>
+  })
+
+}
+
+render () {
+  
+    return <div>{this.movieCards()}</div>;
+  }
+
+}
+
+
+const mapStateToProps = state => {
+  return {
+    moviesData: state.movieData
+  };
 };
 
-
-
-export default MovieIndex;
+export default connect(mapStateToProps, null)(MovieIndex);
