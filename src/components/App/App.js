@@ -23,6 +23,7 @@ class App extends Component {
   fetchMovies = async () => {
     const testRun = await api.fetchParse(api.test);
     const moviesArray = await api.movieCleaner(testRun);
+    console.log(moviesArray)
     await this.props.addMovies(moviesArray);
   };
 
