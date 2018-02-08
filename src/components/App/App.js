@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { addMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
-import { Route, NavLink, Switch, withRouter } from 'react-router-dom'
+import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
 
 // import Header from '../Header/Header';
 import MovieIndex from '../Movies/MovieIndex';
@@ -23,20 +23,22 @@ class App extends Component {
   fetchMovies = async () => {
     const testRun = await api.fetchParse(api.test);
     const moviesArray = await api.movieCleaner(testRun);
-    console.log(moviesArray)
     await this.props.addMovies(moviesArray);
   };
 
   render() {
-   
     return (
-      <div>
-        <header>
-          <h1>Movie Tracker</h1>
-          <NavLink to='/login' className='nav'>Sign in</NavLink>
+      <div className="wrapper">
+        <header className="header">
+          <h1>
+            <span className="movie">Movie</span> Tracker
+          </h1>
+          <NavLink to="/login" className="nav">
+            Sign in
+          </NavLink>
         </header>
-        <Route exact path='/' component={MovieIndex} />
-        <Route path='/login' component={User} /> 
+        <Route exact path="/" component={MovieIndex} />
+        <Route path="/login" component={User} />
       </div>
     );
   }
