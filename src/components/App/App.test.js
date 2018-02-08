@@ -1,9 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { shallow } from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('APP', () => {
+  it.skip('should match the snapshot', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it.skip('should fetchMovies', async () => {
+    const wrapper = shallow(<App />);
+    window.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        status: 200,
+        json: () =>
+          Promise.resolve({
+            status: 200,
+            movies: []
+          })
+      })
+    );
+   
+
+  });
 });
