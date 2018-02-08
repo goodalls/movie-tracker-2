@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MovieIndex } from '../Movies/MovieIndex';
+import  MovieIndex  from '../Movies/MovieIndex';
 import { addMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
 import Header from '../Header/Header';
