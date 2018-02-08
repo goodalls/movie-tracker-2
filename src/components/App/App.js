@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { addMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom'
+import { Route, NavLink, Switch, withRouter } from 'react-router-dom'
 
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 import MovieIndex from '../Movies/MovieIndex';
 import User from '../User/User';
 
@@ -31,9 +31,12 @@ class App extends Component {
    
     return (
       <div>
-        <Header />
+        <header>
+          <h1>Movie Tracker</h1>
+          <NavLink to='/login' className='nav'>Sign in</NavLink>
+        </header>
         <Route exact path='/' component={MovieIndex} />
-        <Route exact path='/user' component={User} /> 
+        <Route path='/login' component={User} /> 
       </div>
     );
   }
@@ -47,4 +50,4 @@ const mapDispatchToProps = dispatch => ({
   addMovies: movies => dispatch(addMovies(movies))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
