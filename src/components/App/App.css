@@ -1,8 +1,8 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-
 }
+
 .header {
   grid-column: 1/13;
   background-color: grey;
@@ -13,7 +13,6 @@
   text-decoration: cornsilk;
   font-size: 1.5em;
   display: inline-block;
-
 }
 
 h1 .movie {
