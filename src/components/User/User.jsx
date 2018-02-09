@@ -31,8 +31,9 @@ export class User extends Component {
       console.log(this.props.history);
     } else {
       //display error page that prompts them to try again
+      alert('WRONG PASSWORD, IDIOT')
+      this.setState({ email: '', password: '' });
     }
-    this.setState({ email: '', password: '' });
   };
 
   render() {
