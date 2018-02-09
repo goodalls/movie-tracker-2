@@ -16,9 +16,18 @@ class User extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    api.logIn(this.state);
+    const response = await api.logIn(this.state)
+    if (response) {
+      const user = response.data
+      ///put this user in the store
+      this.props.history.push('/')
+      console.log(this.props.history)
+    } else {
+      //display error page that prompts them to try again
+    }
+
     this.setState({ email: '', password: '' });
   }
 
