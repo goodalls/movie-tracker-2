@@ -1,47 +1,50 @@
 import React, { Component } from 'react';
 import './User.css';
-import api from '../../apiCalls';
+import * as api from '../../apiCalls';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-class User extends Component {
+export class User extends Component {
   constructor() {
     super();
     this.state = {
       password: '',
-      email: ''
+      email: '',
+      name: ''
     };
   }
 
-  handleInput= (event) => {
+  handleInput = event => {
     const { value, name } = event.target;
     this.setState({ [name]: value });
-  }
+  };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async event => {
     event.preventDefault();
-    const response = await api.logIn(this.state)
+    const response = await api.logIn(this.state);
     if (response) {
-      const user = response.data
+      const user = response.data;
       ///put this user in the store
-      this.props.history.push('/')
-      console.log(this.props.history)
+      this.props.history.push('/');
+      console.log(this.props.history);
     } else {
       //display error page that prompts them to try again
     }
 
     this.setState({ email: '', password: '' });
-  }
+  };
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="email">Email: </label>
-          <input 
-            type="text" 
-            id="email" 
-            name="email" 
+          <input
+            type="text"
+            id="email"
+            name="email"
             onChange={this.handleInput}
-            value={this.state.email} 
+            value={this.state.email}
           />
           <label htmlFor="password">Password: </label>
           <input
@@ -58,4 +61,12 @@ class User extends Component {
   }
 }
 
-export default User;
+const mapStateToProps = store => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));

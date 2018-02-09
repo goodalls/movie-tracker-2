@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Card from '../Card/Card';
 import { connect } from 'react-redux';
+import './MovieIndex.css';
 
 export class MovieIndex extends Component {
   movieCards = () => {
@@ -11,7 +12,7 @@ export class MovieIndex extends Component {
   };
 
   render() {
-    return <div>{this.movieCards()}</div>;
+    return <div className='movie-index' >{this.movieCards()}</div>;
   }
 }
 

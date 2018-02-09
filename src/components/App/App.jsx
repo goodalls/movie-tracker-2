@@ -7,7 +7,7 @@ import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
 import MovieIndex from '../Movies/MovieIndex';
 import User from '../User/User';
 
-import api from '../../apiCalls';
+import * as api from '../../apiCalls';
 import './App.css';
 
 class App extends Component {
