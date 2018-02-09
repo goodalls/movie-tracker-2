@@ -11,6 +11,11 @@ describe('APP', () => {
 
   it.skip('should fetchMovies', async () => {
     const wrapper = shallow(<App />);
+
+    // api.fetchParse = jest.fn()
+    // fetchMovies()
+    // expect(api.fetchParse).toHaveBeenCalled;
+    
     window.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
         status: 200,

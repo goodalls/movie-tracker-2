@@ -1,4 +1,4 @@
-export const moviesReducer = (state = [], action) => {
+const movies = (state = [], action) => {
   switch (action.type) {
     case 'ADD_MOVIES':
       return [...state, ...action.movies];
@@ -7,4 +7,4 @@ export const moviesReducer = (state = [], action) => {
   }
 };
 
-export default moviesReducer;
+export default movies;
