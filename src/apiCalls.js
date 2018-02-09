@@ -20,15 +20,26 @@ const movieCleaner = movies => {
 };
 
 const logIn = async (user) => {
-  //user is the this.state object from User form
-  const response = await fetch('/api/users', {
-    method: 'POST',
-    body: JSON.stringify(user),
-    headers: { 'Content-Type': 'application/json' }
+  
+  try {
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: { 'Content-Type': 'application/json' }
+      })
+    console.log(response)
+    const parsed = await response.json();
 
-  });
-  const parsed = await response.json();
-  console.log(parsed);
+    if (response.ok) {
+      console.log(parsed)
+      return parsed
+    } 
+  } catch(error){
+    console.log('error block')
+    return false
+  }
+  
+
 };
 
 export default { fetchParse, test, movieCleaner, logIn };
