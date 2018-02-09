@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { addMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
 import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
-
-// import Header from '../Header/Header';
 import MovieIndex from '../Movies/MovieIndex';
 import User from '../User/User';
+import {NewUser} from '../NewUser/NewUser'
 
 import * as api from '../../apiCalls';
 import './App.css';
@@ -36,9 +35,13 @@ class App extends Component {
           <NavLink to="/login" className="nav">
             Sign in
           </NavLink>
+          <NavLink to="/new-user" className="nav">
+            Create an Account
+          </NavLink>
         </header>
         <Route exact path="/" component={MovieIndex} />
         <Route path="/login" component={User} />
+        <Route path="/new-user" component={NewUser} />
       </div>
     );
   }
