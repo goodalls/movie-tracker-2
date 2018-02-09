@@ -14,22 +14,9 @@ describe('APP', () => {
     
     const api = jest.fn();
     const wrapper = shallow(<App />);
-
-    // api.fetchParse = jest.fn()
-    // fetchMovies()
-    // expect(api.fetchParse).toHaveBeenCalled;
+    const call = fetchMovies();
     
-    window.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        status: 200,
-        json: () =>
-          Promise.resolve({
-            status: 200,
-            movies: []
-          })
-      })
-    );
-   
+    expect(call).toHaveCalled(api.fetchParse);
 
   });
 });
