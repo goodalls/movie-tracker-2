@@ -1,29 +1,51 @@
 import React, { Component } from 'react';
 import './User.css';
+import api from '../../apiCalls';
 
 class User extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: ''
-    }
+      password: '',
+      email: ''
+    };
   }
 
-  
+  handleInput= (event) => {
+    const { value, name } = event.target;
+    this.setState({ [name]: value });
+  }
 
-  render () {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    api.logIn(this.state);
+    this.setState({ email: '', password: '' });
+  }
+
+  render() {
     return (
       <div>
-        <form>
-          <label for="email">Email: </label>
-          <input type="text" id="email" value={this.state.email}/>
-          <label for="password">Password: </label>
-          <input type="text" id="password" value={this.state.password} />
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="email">Email: </label>
+          <input 
+            type="text" 
+            id="email" 
+            name="email" 
+            onChange={this.handleInput}
+            value={this.state.email} 
+          />
+          <label htmlFor="password">Password: </label>
+          <input
+            type="text"
+            id="password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleInput}
+          />
           <input type="submit" />
         </form>
-        </div>
-      )
+      </div>
+    );
   }
 }
 
