@@ -3,6 +3,7 @@ import './User.css';
 import * as api from '../../apiCalls';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import {logIn} from '../../actions/actions';
 
 export class User extends Component {
   constructor() {
@@ -23,14 +24,14 @@ export class User extends Component {
     event.preventDefault();
     const response = await api.logIn(this.state);
     if (response) {
-      const user = response.data;
-      ///put this user in the store
+      const user = await response.data;
+      this.props.logIn(user);
+
       this.props.history.push('/');
       console.log(this.props.history);
     } else {
       //display error page that prompts them to try again
     }
-
     this.setState({ email: '', password: '' });
   };
 
@@ -66,7 +67,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  logIn: (user) => dispatch(logIn(user))  
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));

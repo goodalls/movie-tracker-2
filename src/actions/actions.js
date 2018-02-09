@@ -4,3 +4,10 @@ export const addMovies = movies => {
     movies
   };
 };
+
+export const logIn = userObject => {
+  return {
+    type: 'LOG_IN',
+    userObject
+  };
+};
