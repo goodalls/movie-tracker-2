@@ -19,4 +19,16 @@ const movieCleaner = movies => {
   });
 };
 
-export default { fetchParse, test, movieCleaner };
+const logIn = async (user) => {
+  //user is the this.state object from User form
+  const response = await fetch('/api/users', {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: { 'Content-Type': 'application/json' }
+
+  });
+  const parsed = await response.json();
+  console.log(parsed);
+};
+
+export default { fetchParse, test, movieCleaner, logIn };
