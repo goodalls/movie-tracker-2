@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './NewUser.css';
-import * as api from '../../apiCalls';
-import { logIn } from '../../actions/actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { createUser } from '../../actions/actions';
+import { logIn } from '../../actions/actions';
+import * as api from '../../apiCalls';
+import PropTypes from 'prop-types';
+import './NewUser.css';
 
 export class NewUser extends Component {
   constructor() {
@@ -22,14 +22,18 @@ export class NewUser extends Component {
   };
 
   handleSubmit = async event => {
+    console.log(this.props)
     event.preventDefault();
     const response = await api.createUser(this.state);
     if (response) {
-      const { email, password } = this.state 
+      const { email, password } = this.state; 
       const credentials = Object.assign({}, {email}, {password});
+
       const logInResponse = await api.logIn(credentials);
+
       if (logInResponse) {
         const user = await logInResponse.data
+
         this.props.logIn(user)
         this.props.history.push('/');
       }
@@ -71,13 +75,15 @@ export class NewUser extends Component {
   }
 }
 
-const mapStateToProps = store => ({
-
-});
   
 const mapDispatchToProps = dispatch => ({
   logIn: user => dispatch(logIn(user))
 });
+
+NewUser.propTypes = {
+  logIn: PropTypes.func,
+  history: PropTypes.object
+};
 
 export default withRouter(
   connect(null, mapDispatchToProps)(NewUser)
