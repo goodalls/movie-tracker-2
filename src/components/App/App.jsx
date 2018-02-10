@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Route, NavLink, withRouter } from 'react-router-dom';
 import { addMovies } from '../../actions/actions';
 import MovieIndex from '../Movies/MovieIndex';
-import { NewUser } from '../NewUser/NewUser';
 import * as api from '../../apiCalls';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import User from '../User/User';
+import NewUser from '../NewUser/NewUser';
 import './App.css';
 
 class App extends Component {

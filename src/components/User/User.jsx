@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { logIn } from '../../actions/actions';
 import * as api from '../../apiCalls';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './User.css';
 
@@ -28,8 +28,7 @@ export class User extends Component {
       this.props.logIn(user);
       this.props.history.push('/');
     } else {
-      //display error page that prompts them to try again
-      alert('WRONG PASSWORD, IDIOT');
+      alert('WRONG PASSWORD');
       this.setState({ email: '', password: '' });
     }
   };
@@ -68,7 +67,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 User.propTypes = {
-  logIn: PropTypes.string,
+  logIn: PropTypes.func,
   history: PropTypes.object
 };
 
