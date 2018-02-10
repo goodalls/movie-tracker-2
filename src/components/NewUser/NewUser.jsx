@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './NewUser.css';
 import * as api from '../../apiCalls';
+import { logIn } from '../../actions/actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createUser } from '../../actions/actions';
@@ -22,7 +23,20 @@ export class NewUser extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    await api.createUser(this.state);
+    const response = await api.createUser(this.state);
+    if (response) {
+      const { email, password } = this.state 
+      const credentials = Object.assign({}, {email}, {password});
+      const logInResponse = await api.logIn(credentials);
+      if (logInResponse) {
+        const user = await logInResponse.data
+        this.props.logIn(user)
+        this.props.history.push('/');
+      }
+    } else {
+      alert('TRY AGAIN');
+      this.setState({name:'', email:'', password:''})
+    }
   };
 
   render() {
@@ -57,10 +71,14 @@ export class NewUser extends Component {
   }
 }
 
-const mapStateToProps = store => ({});
+const mapStateToProps = store => ({
 
-const mapDispatchToProps = dispatch => ({});
+});
+  
+const mapDispatchToProps = dispatch => ({
+  logIn: user => dispatch(logIn(user))
+});
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(NewUser)
+  connect(null, mapDispatchToProps)(NewUser)
 );
