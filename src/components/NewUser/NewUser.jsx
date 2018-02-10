@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import './User.css';
+import './NewUser.css';
 import * as api from '../../apiCalls';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import {logIn} from '../../actions/actions';
+import {createUser} from '../../actions/actions';
 
-export class User extends Component {
+
+export  class NewUser extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,31 +16,17 @@ export class User extends Component {
     };
   }
 
-  handleInput = event => {
-    const { value, name } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = async event => {
-    event.preventDefault();
-    const response = await api.logIn(this.state);
-    if (response) {
-      const user = await response.data;
-      this.props.logIn(user);
-
-      this.props.history.push('/');
-      console.log(this.props.history);
-    } else {
-      //display error page that prompts them to try again
-      alert('WRONG PASSWORD, IDIOT')
-      this.setState({ email: '', password: '' });
-    }
-  };
-
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <label htmlFor="name">Name: </label>
+          <input
+            type="text"
+            id="name"
+            onChange={this.handleInput}
+            value={this.state.name}
+            />
           <label htmlFor="email">Email: </label>
           <input
             type="text"
@@ -68,7 +55,6 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logIn: (user) => dispatch(logIn(user))  
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewUser));
