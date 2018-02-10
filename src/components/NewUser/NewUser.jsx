@@ -22,7 +22,28 @@ export class NewUser extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    await api.createUser(this.state);
+    const response = await api.createUser(this.state);
+    if (response) {
+      const userId = await response.id;
+      this.props.history.push('/');
+      const { email, password } = this.state 
+      const user = Object.assign({}, {email}, {password})
+      console.log(user)
+      
+      // const loggedIn = await api.logIn(user);
+      // if (loggedIn) {
+      //   const user =
+      // }
+
+
+      //use the id from that obj
+      //fetch again to the database
+      //get the corresponding user obj for that id
+      //send that obj to login action / store
+    } else {
+      alert('TRY AGAIN');
+      this.setState({name:'', email:'', password:''})
+    }
   };
 
   render() {
@@ -57,9 +78,13 @@ export class NewUser extends Component {
   }
 }
 
-const mapStateToProps = store => ({});
+const mapStateToProps = store => ({
 
-const mapDispatchToProps = dispatch => ({});
+});
+  
+const mapDispatchToProps = dispatch => ({
+
+});
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(NewUser)
