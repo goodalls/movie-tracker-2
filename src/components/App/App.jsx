@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Route, NavLink, withRouter } from 'react-router-dom';
 import { addMovies } from '../../actions/actions';
-import { connect } from 'react-redux';
-import { Route, NavLink, Switch, withRouter } from 'react-router-dom';
 import MovieIndex from '../Movies/MovieIndex';
-import User from '../User/User';
 import { NewUser } from '../NewUser/NewUser';
 import * as api from '../../apiCalls';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import User from '../User/User';
 import './App.css';
 
 class App extends Component {
@@ -60,5 +61,9 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => ({
   addMovies: movies => dispatch(addMovies(movies))
 });
+
+App.propTypes = {
+  addMovies: PropTypes.func
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

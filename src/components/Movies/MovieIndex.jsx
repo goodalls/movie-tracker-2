@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '../Card/Card';
 import { connect } from 'react-redux';
 import './MovieIndex.css';
+import PropTypes from 'prop-types';
 
 export class MovieIndex extends Component {
   movieCards = () => {
@@ -12,7 +13,7 @@ export class MovieIndex extends Component {
   };
 
   render() {
-    return <div className='movie-index' >{this.movieCards()}</div>;
+    return <div className="movie-index">{this.movieCards()}</div>;
   }
 }
 
@@ -20,6 +21,10 @@ const mapStateToProps = state => {
   return {
     moviesData: state.movieData
   };
+};
+
+MovieIndex.propTypes = {
+  moviesData: PropTypes.array
 };
 
 export default connect(mapStateToProps)(MovieIndex);
