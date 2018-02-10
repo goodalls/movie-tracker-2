@@ -10,8 +10,7 @@ export class User extends Component {
     super();
     this.state = {
       password: '',
-      email: '',
-      name: ''
+      email: ''
     };
   }
 
@@ -28,7 +27,7 @@ export class User extends Component {
       this.props.logIn(user);
 
       this.props.history.push('/');
-      console.log(this.props.history);
+      console.log(user)
     } else {
       //display error page that prompts them to try again
       alert('WRONG PASSWORD, IDIOT')

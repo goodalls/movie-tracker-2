@@ -44,7 +44,6 @@ export const createUser = async (user) => {
     })
     const parsed = await response.json();
     if (response.ok) {
-      console.log(parsed);
       return parsed;
     }
   } catch (error) {

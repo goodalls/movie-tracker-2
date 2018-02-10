@@ -10,10 +10,20 @@ export  class NewUser extends Component {
   constructor() {
     super();
     this.state = {
-      password: '',
+      name: '',
       email: '',
-      name: ''
+      password: '',
     };
+  }
+
+  handleInput = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]:value })
+  }
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    const response = await api.createUser(this.state);
   }
 
   render() {
@@ -23,14 +33,13 @@ export  class NewUser extends Component {
           <label htmlFor="name">Name: </label>
           <input
             type="text"
-            id="name"
+            name="name"
             onChange={this.handleInput}
             value={this.state.name}
             />
           <label htmlFor="email">Email: </label>
           <input
             type="text"
-            id="email"
             name="email"
             onChange={this.handleInput}
             value={this.state.email}
@@ -38,7 +47,6 @@ export  class NewUser extends Component {
           <label htmlFor="password">Password: </label>
           <input
             type="text"
-            id="password"
             name="password"
             value={this.state.password}
             onChange={this.handleInput}
@@ -55,6 +63,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewUser));
