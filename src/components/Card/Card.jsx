@@ -1,5 +1,6 @@
 import React from 'react';
 import './Card.css';
+import PropTypes from 'prop-types'; 
 
 const Card = ({ title, poster }) => {
   return (
@@ -13,6 +14,11 @@ const Card = ({ title, poster }) => {
       />
     </div>
   );
+};
+
+Card.propTypes = {
+  title: PropTypes.string,
+  poster: PropTypes.string
 };
 
 export default Card;
