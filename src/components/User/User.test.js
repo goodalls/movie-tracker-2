@@ -1,7 +1,7 @@
 import React from 'react';
-import NewUser from './NewUser';
 import { shallow } from 'enzyme';
+import User from './User';
 
-describe('NEW_USER', () => {
+describe('USER', () => {
   it('should', () => {});
 });

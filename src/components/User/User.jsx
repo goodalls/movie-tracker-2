@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './User.css';
+import { withRouter } from 'react-router-dom';
+import { logIn } from '../../actions/actions';
 import * as api from '../../apiCalls';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import {logIn} from '../../actions/actions';
+import PropTypes from 'prop-types';
+import './User.css';
 
 export class User extends Component {
   constructor() {
@@ -27,10 +28,9 @@ export class User extends Component {
       this.props.logIn(user);
 
       this.props.history.push('/');
-      console.log(user)
     } else {
       //display error page that prompts them to try again
-      alert('WRONG PASSWORD, IDIOT')
+      alert('WRONG PASSWORD, IDIOT');
       this.setState({ email: '', password: '' });
     }
   };
@@ -54,7 +54,7 @@ export class User extends Component {
             name="password"
             value={this.state.password}
             onChange={this.handleInput}
-          />  
+          />
           <input type="submit" />
         </form>
       </div>
@@ -62,12 +62,15 @@ export class User extends Component {
   }
 }
 
-const mapStateToProps = store => ({
-
-});
+const mapStateToProps = store => ({});
 
 const mapDispatchToProps = dispatch => ({
-  logIn: (user) => dispatch(logIn(user))  
+  logIn: user => dispatch(logIn(user))
 });
+
+User.propTypes = {
+  logIn: PropTypes.string,
+  history: PropTypes.object
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));

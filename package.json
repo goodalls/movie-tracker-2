@@ -25,6 +25,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.17.0",
     "jest-enzyme": "^4.2.0",
+    "prop-types": "^15.6.0",
     "react-test-renderer": "^16.2.0",
     "redux-devtools": "^3.4.1"
   }
