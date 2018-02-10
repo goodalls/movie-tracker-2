@@ -26,7 +26,6 @@ export class User extends Component {
     if (response) {
       const user = await response.data;
       this.props.logIn(user);
-      console.log(user);
       this.props.history.push('/');
     } else {
       //display error page that prompts them to try again

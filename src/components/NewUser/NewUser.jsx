@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './NewUser.css';
 import * as api from '../../apiCalls';
+import { logIn } from '../../actions/actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createUser } from '../../actions/actions';
@@ -24,22 +25,14 @@ export class NewUser extends Component {
     event.preventDefault();
     const response = await api.createUser(this.state);
     if (response) {
-      const userId = await response.id;
-      this.props.history.push('/');
       const { email, password } = this.state 
-      const user = Object.assign({}, {email}, {password})
-      console.log(user)
-      
-      // const loggedIn = await api.logIn(user);
-      // if (loggedIn) {
-      //   const user =
-      // }
-
-
-      //use the id from that obj
-      //fetch again to the database
-      //get the corresponding user obj for that id
-      //send that obj to login action / store
+      const credentials = Object.assign({}, {email}, {password});
+      const logInResponse = await api.logIn(credentials);
+      if (logInResponse) {
+        const user = await logInResponse.data
+        this.props.logIn(user)
+        this.props.history.push('/');
+      }
     } else {
       alert('TRY AGAIN');
       this.setState({name:'', email:'', password:''})
@@ -83,9 +76,9 @@ const mapStateToProps = store => ({
 });
   
 const mapDispatchToProps = dispatch => ({
-
+  logIn: user => dispatch(logIn(user))
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(NewUser)
+  connect(null, mapDispatchToProps)(NewUser)
 );
