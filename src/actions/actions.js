@@ -5,16 +5,9 @@ export const addMovies = movies => {
   };
 };
 
-export const logIn = userObject => {
+export const logIn = user => {
   return {
     type: 'LOG_IN',
-    userObject
+    user
   };
 };
-
-export const createUser = userObject => {
-  return {
-    type: 'CREATE_USER',
-    userObject
-  }
-}
