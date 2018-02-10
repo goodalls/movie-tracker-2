@@ -11,3 +11,10 @@ export const logIn = userObject => {
     userObject
   };
 };
+
+export const createUser = userObject => {
+  return {
+    type: 'CREATE_USER',
+    userObject
+  }
+}
