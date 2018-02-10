@@ -5,7 +5,7 @@
 }
 
 .favorite {
-  
+  position: absolute;
   height: 25px;
   width: 25px;
   background-image: url('./star-default.svg');
