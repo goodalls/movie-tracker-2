@@ -15,15 +15,21 @@ class App extends Component {
     this.state = {};
   }
 
+
   componentDidMount = async () => {
     this.fetchMovies();
   };
 
+  componentWillReceiveProps = () => {
+    
+  }
+  
   fetchMovies = async () => {
     const testRun = await api.fetchParse(api.test);
     const moviesArray = await api.movieCleaner(testRun);
     await this.props.addMovies(moviesArray);
   };
+
 
   render() {
     return (
@@ -48,7 +54,8 @@ class App extends Component {
 }
 
 const mapStateToProps = store => ({
-  movies: store.movieData
+  movies: store.movieData,
+  user: store.user
 });
 
 const mapDispatchToProps = dispatch => ({
