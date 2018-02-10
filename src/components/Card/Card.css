@@ -1,3 +1,18 @@
 .Card {
   height: 250px;
+  margin: 10px;
+  
+}
+
+.favorite {
+  
+  height: 25px;
+  width: 25px;
+  background-image: url('./star-default.svg');
+  background-size: 25px;
+  background-repeat: no-repeat;
+}
+
+.favorite:hover {
+  background-image: url('./star-hover.svg');
 }

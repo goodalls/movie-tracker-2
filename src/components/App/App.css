@@ -1,12 +1,14 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, auto)
 }
 
 .header {
   grid-column: 1/13;
   background-color: grey;
   height: 50px;
+  grid-row: 1;
 }
 
 .header h1 {
