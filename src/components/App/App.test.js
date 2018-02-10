@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { shallow } from 'enzyme';
-
-// import apiCalls, { mockApiCalls } from '../../apiCalls.js';
-// jest.mock('../../apiCalls.js');
+import { shallow, mount, render } from 'enzyme';
+import * as api from '../../apiCalls';
 
 describe('APP', () => {
   it.skip('should match the snapshot', () => {
@@ -12,12 +10,12 @@ describe('APP', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it.skip('should fetchMovies', async () => {
+  it('should fetchMovies', async () => {
     const wrapper = shallow(<App />);
-    api.fetchParse = jest.fn();
     const mockUrl = 'http://mock.com';
+    api.fetchParse = jest.fn(mockUrl);
     wrapper.instance().fetchMovies();
-    expect(wrapper.instance().api.fetchParse()).toHaveBeenCalled();
+    expect(api.fetchParse()).toHaveBeenCalledWith(mockUrl);
   });
 
   it.skip('should map the store correctly', () => {
@@ -25,7 +23,8 @@ describe('APP', () => {
     const title = 'RockyIV';
     const poster = '/jeffIsGreat';
     const mockStore = { movieData: [{ title, poster }] };
-    const mapped = wrapper.mapStateToProps(mockStore);
+    // const mapped = spyOn(wrapper.instance(), 'mapStateToProps').and.callThrough();
+    // const mapped = wrapper.instance().mapStateToProps(mockStore);
     expect(mapped.movieData).toEqual({ title, poster });
   });
 
