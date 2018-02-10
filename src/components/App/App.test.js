@@ -3,30 +3,20 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { shallow } from 'enzyme';
 
+import apiCalls, { mockApiCalls } from '../../apiCalls.js';
+jest.mock('../../apiCalls.js');
+
 describe('APP', () => {
   it.skip('should match the snapshot', () => {
     const wrapper = shallow(<App />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  it.skip('should fetchMovies', async () => {
-    const wrapper = shallow(<App />);
-
-    // api.fetchParse = jest.fn()
-    // fetchMovies()
-    // expect(api.fetchParse).toHaveBeenCalled;
-    
-    window.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        status: 200,
-        json: () =>
-          Promise.resolve({
-            status: 200,
-            movies: []
-          })
-      })
-    );
-   
-
+  it('should fetchMovies', async () => {
+    // const wrapper = shallow(<App />);
+    // api.fetchParse = jest.fn();
+    // const mockUrl = 'http://mock.com';
+    // wrapper.instance().fetchMovies();   
+    // expect(wrapper.instance().api.fetchParse()).toHaveBeenCalled();
   });
 });
