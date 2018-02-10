@@ -1,3 +1,6 @@
+
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import { addMovies } from '../../actions/actions';
 import { connect } from 'react-redux';
@@ -19,9 +22,12 @@ class App extends Component {
   };
 
   fetchMovies = async () => {
-    api.fetchParse(api.test);
-    const moviesArray = await api.movieCleaner(testRun);
-    await this.props.addMovies(moviesArray);
+    api.fetchParse(url);
+    api.movieCleaner(object);
+    return {
+      title: 'title'
+      poster: 'poster'
+    }
   };
 
   render() {
