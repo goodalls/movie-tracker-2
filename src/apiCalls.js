@@ -19,27 +19,24 @@ export const movieCleaner = movies => {
   });
 };
 
-export const logIn = async (user) => {
-  
+export const logIn = async user => {
   try {
     const response = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: { 'Content-Type': 'application/json' }
-      })
-    console.log(response)
+    });
+    console.log(response);
     const parsed = await response.json();
 
     if (response.ok) {
-      console.log(parsed)
-      return parsed
-    } 
-  } catch(error){
-    console.log('error block')
-    return false
+      console.log(parsed);
+      return parsed;
+    }
+  } catch (error) {
+    console.log('error block');
+    return false;
   }
-  
-
 };
 
 // export default { fetchParse, test, movieCleaner, logIn };
