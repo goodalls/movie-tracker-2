@@ -28,17 +28,13 @@ export class NewUser extends Component {
     if (response) {
       const { email, password } = this.state; 
       const credentials = Object.assign({}, {email}, {password});
-
-      const logInResponse = await api.logIn(credentials);
-
-      if (logInResponse) {
-        const user = await logInResponse.data
-
+      const user = await api.logIn(credentials);
+      if (user) {
         this.props.logIn(user)
         this.props.history.push('/');
       }
     } else {
-      alert('TRY AGAIN');
+      alert('Email has already been used');
       this.setState({name:'', email:'', password:''})
     }
   };

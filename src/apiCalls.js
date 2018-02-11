@@ -34,7 +34,7 @@ export const logIn = async user => {
     const parsed = await response.json();
     if (response.ok) {
       console.log(parsed)
-      return parsed
+      return parsed.data
     } 
   } catch(error){
     return false

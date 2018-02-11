@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, NavLink, withRouter } from 'react-router-dom';
-import { addMovies } from '../../actions/actions';
+import { addMovies, logOut } from '../../actions/actions';
 import MovieIndex from '../Movies/MovieIndex';
 import * as api from '../../apiCalls';
 import { connect } from 'react-redux';
@@ -33,6 +33,8 @@ export class App extends Component {
 
 
   render() {
+    const {logOut} = this.props;
+
     return (
       <div className="wrapper">
         <header className="header">
@@ -44,6 +46,9 @@ export class App extends Component {
           </NavLink>
           <NavLink to="/new-user" className="nav">
             Create an Account
+          </NavLink>
+          <NavLink to="/login" className="nav" onClick={logOut} >
+            Sign out
           </NavLink>
         </header>
         <Route exact path="/" component={MovieIndex} />
@@ -60,11 +65,13 @@ export const mapStateToProps = store => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  addMovies: movies => dispatch(addMovies(movies))
+  addMovies: movies => dispatch(addMovies(movies)),
+  logOut: () => dispatch(logOut())
 });
 
 App.propTypes = {
-  addMovies: PropTypes.func
+  addMovies: PropTypes.func,
+  logOut: PropTypes.func
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
