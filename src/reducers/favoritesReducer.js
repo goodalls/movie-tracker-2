@@ -5,7 +5,7 @@ const favorites = (state = [], action) => {
     case 'ADD_FAVORITE': 
       return [...state, action.favorite];
     case 'REMOVE_FAVORITE': 
-      return state.filter(movie => movie.id !== action.unFavorite.id);
+      return state.filter(movie => movie.movie_id !== action.unFavorite.movie_id);
     default: 
       return state;
   }

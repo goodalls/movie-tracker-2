@@ -25,9 +25,8 @@ export class App extends Component {
   }
   
   fetchMovies = async () => {
-    const testRun = await api.fetchParse(api.test);
-    console.log(testRun)
-    const moviesArray = await api.movieCleaner(testRun);
+    const movies = await api.fetchParse(api.test);
+    const moviesArray = await api.movieCleaner(movies);
     await this.props.addMovies(moviesArray);
   };
 
@@ -38,9 +37,7 @@ export class App extends Component {
     return (
       <div className="wrapper">
         <header className="header">
-          <h1>
-            <span className="movie">Movie</span> Tracker
-          </h1>
+          <NavLink to="/" className="title"><h1>Movie Tracker</h1></NavLink>
           <NavLink to="/login" className="nav">
             Sign in
           </NavLink>
@@ -60,7 +57,7 @@ export class App extends Component {
 }
 
 export const mapStateToProps = store => ({
-  movies: store.movieData,
+  movies: store.movies,
   user: store.user
 });
 
