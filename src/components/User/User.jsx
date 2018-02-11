@@ -22,9 +22,8 @@ export class User extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const response = await api.logIn(this.state);
-    if (response) {
-      const user = await response.data;
+    const user = await api.logIn(this.state);
+    if (user) {
       this.props.logIn(user);
       this.props.history.push('/');
     } else {
