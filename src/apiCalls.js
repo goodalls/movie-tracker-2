@@ -11,12 +11,17 @@ export const fetchParse = async url => {
 };
 
 export const movieCleaner = movies => {
+  if (movies === null) {
+    return undefined
+  }
+
   return movies.results.map(movie => {
     return {
       title: movie.title,
       poster: movie.poster_path
     };
   });
+
 };
 
 export const logIn = async user => {
@@ -28,6 +33,7 @@ export const logIn = async user => {
     });
     const parsed = await response.json();
     if (response.ok) {
+      console.log(parsed)
       return parsed
     } 
   } catch(error){
