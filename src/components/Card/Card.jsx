@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types'; 
 import './Card.css';
 
-const Card = ({ title, poster }) => {
+const Card = ({ movie, handleClick }) => {
   return (
-    <div className="Card">
-      <h2> {title} </h2>
+    <div className="Card" id={movie.movie_id}>
+      <h2> {movie.title} </h2>
       <img
         height="100"
         width="100"
-        src={`https://image.tmdb.org/t/p/w500/${poster}`}
-        alt={`${title} movie poster`}
+        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+        alt={`${movie.title} movie poster`}
       />
+      <button onClick={handleClick} id={movie.movie_id}>Favorite</button>
     </div>
   );
 };

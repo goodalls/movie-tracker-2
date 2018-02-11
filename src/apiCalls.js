@@ -1,7 +1,5 @@
 import { key } from './key';
 
-// const rootUrl = `https://api.themoviedb.org/3/movie/550?api_key=${key}`;
-
 export const test = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=1`;
 
 export const fetchParse = async url => {
@@ -14,14 +12,23 @@ export const movieCleaner = movies => {
   if (movies === null) {
     return undefined
   }
-
   return movies.results.map(movie => {
+    const { 
+      title, 
+      poster_path, 
+      id, 
+      release_date, 
+      vote_average, 
+      overview } = movie;
     return {
-      title: movie.title,
-      poster: movie.poster_path
+      title, 
+      poster_path, 
+      movie_id: id, 
+      release_date, 
+      vote_average, 
+      overview
     };
   });
-
 };
 
 export const logIn = async user => {
