@@ -49,7 +49,7 @@ export const logIn = async user => {
       return parsed.data;
     }
   } catch (error) {
-    return false;
+    return "Error in logIn";
   }
 };
 

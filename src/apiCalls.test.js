@@ -1,15 +1,16 @@
 import * as api from './apiCalls';
 
-describe('API_CALLS', () => {
+describe('apiCalls', () => {
   let mockUrl;
+
   describe('fetchParse', () => {
     beforeAll(() => {
       window.fetch = jest.fn().mockImplementation(() =>
         Promise.resolve({
           json: () =>
-            Promise.resolve({
-              hello: 'youFool'
-            })
+            Promise.resolve([{
+              title: 'Citizen Kane'
+            }])
         })
       );
       mockUrl = 'http://mock.com';
@@ -20,11 +21,12 @@ describe('API_CALLS', () => {
       expect(window.fetch).toHaveBeenCalledWith(mockUrl);
     });
 
-    it('should resolve a promise', () => {
-      expect(api.fetchParse(mockUrl)).resolves.toEqual({ hello: 'youFool' });
+    it('should return a parsed data object for a given URL', () => {
+      const expectedMovies = [{ title: 'Citizen Kane' }]
+      expect(api.fetchParse(mockUrl)).resolves.toEqual(expectedMovies);
     });
 
-    it('should error if not resolved', async () => {
+    it('should error if the request is rejected', async () => {
       window.fetch = jest.fn().mockImplementation(() =>
         Promise.reject({
           status: 404,
@@ -45,14 +47,22 @@ describe('API_CALLS', () => {
         mockData = {
           results: [
             {
-              adult: false,
-              title: 'The Interview',
-              poster_path: '/8PADfwpMWK0ASDe4Z5lALCf0zGu.jpg'
+              id: 36534,
+              title: 'Frozen',
+              poster_path: '/8PADfwpMWK0ASDe4Z5lALCf0zGu.jpg', 
+              release_date: 2015, 
+              vote_average: 8, 
+              overview: "I dunno but the song LET IT GO seems apt today", 
+              PIZZA: 'TACOS'
             },
             {
-              adult: false,
+              id: 494,
               title: 'Gone with the Wind',
-              poster_path: '/4o1yeosjSFMaI9pe1rOkYcZ6hHO.jpg'
+              poster_path: '/4o1yeosjSFMaI9pe1rOkYcZ6hHO.jpg', 
+              release_date: 1939, 
+              vote_average: 8, 
+              overview: "An overly romanticized version of American Reconstruction", 
+              PIZZA: 'TACOS'
             }
           ],
           total_pages: 20,
@@ -61,17 +71,25 @@ describe('API_CALLS', () => {
 
         expected = [
           {
-            title: 'The Interview',
-            poster_path: '/8PADfwpMWK0ASDe4Z5lALCf0zGu.jpg'
+            movie_id: 36534,
+            title: 'Frozen',
+            poster_path: '/8PADfwpMWK0ASDe4Z5lALCf0zGu.jpg', 
+            release_date: 2015, 
+            vote_average: 8, 
+            overview: "I dunno but the song LET IT GO seems apt today", 
           },
           {
+            movie_id: 494,
             title: 'Gone with the Wind',
-            poster_path: '/4o1yeosjSFMaI9pe1rOkYcZ6hHO.jpg'
+            poster_path: '/4o1yeosjSFMaI9pe1rOkYcZ6hHO.jpg', 
+            release_date: 1939, 
+            vote_average: 8, 
+            overview: "An overly romanticized version of American Reconstruction", 
           }
         ];
       });
 
-      it('returns an array of movie objects', () => {
+      it('returns an array of cleaned movie objects', () => {
         expect(api.movieCleaner(mockData)).toEqual(expected);
       });
     });
@@ -102,16 +120,80 @@ describe('API_CALLS', () => {
   });
 
   describe('logIn', () => {
-    describe('when given a user name and password', () => {
-      //it makes the correct fetch request with the un and pw
-      //this is testing 29-32
+    beforeAll(() => {
+      window.fetch = jest.fn().mockImplementation(() =>
+        Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({ data: 
+              { id: 0, 
+                password: 'tacos', 
+                email: 'will@aol.com', 
+                name: 'Will' } })
+        })
+      );
     });
 
-    // describe when the fetch request is successful
-    // we don't care what the un and pw are here, we just care that
-    // it hits this block
-    // this is testing 34-37
+    it('makes a fetch request to the database', () => {
+      const mockUser = { password: 'tacos', email: 'will@aol.com' }
+      const mockUrl = '/api/users'
+      const mockRequestObj =  {
+          method: 'POST',
+          body: JSON.stringify(mockUser),
+          headers: { 'Content-Type': 'application/json' }}
+      const expected = JSON.stringify(mockUser)
+      api.logIn(mockUser);
+      expect(window.fetch).toHaveBeenCalledWith(mockUrl, mockRequestObj);
+    })
 
-    // describe when the fetch request is unsuccessful
+    it('it returns a user object with an ID for the store', () => {
+      const mockUser = { password: 'tacos', email: 'will@aol.com' }
+      const expected = { id: 0, password: 'tacos', email: 'will@aol.com', name: 'Will' }
+      const userObj = api.logIn(mockUser);
+      expect(userObj).resolves.toEqual(expected)
+    })
+
+    it('it returns an error if the request is unsuccessful', () => {
+      window.fetch = jest.fn().mockImplementation(() =>
+        Promise.reject({
+          status: 404,
+          json: () => Promise.reject('Error in logIn')
+        })
+      );
+      const mockUser = { password: 'tacos', email: 'will@aol.com' }
+      const expected = 'Error in logIn'
+      const error = api.logIn(mockUser);
+      expect(error).resolves.toEqual(expected)
+    })
   });
+
+  describe('createUser', () => {
+    // beforeAll(() => {
+    //   window.fetch = jest.fn().mockImplementation(() =>
+    //     Promise.resolve({
+    //       ok: true,
+    //       json: () =>
+    //         Promise.resolve({ data: 
+    //           { id: 0, 
+    //             password: 'tacos', 
+    //             email: 'will@aol.com', 
+    //             name: 'Will' } })
+    //     })
+    //   );
+    // });
+    // it('')
+  })
+
+  describe('addFavorite', () => {
+    
+  })
+
+  describe('removeFavorite', () => {
+    
+  })
+
+  describe('fetchAllFavorites', () => {
+    
+  })
+
 });
