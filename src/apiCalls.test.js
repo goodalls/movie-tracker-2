@@ -62,11 +62,11 @@ describe('API_CALLS', () => {
         expected = [
           {
             title: 'The Interview',
-            poster: '/8PADfwpMWK0ASDe4Z5lALCf0zGu.jpg'
+            poster_path: '/8PADfwpMWK0ASDe4Z5lALCf0zGu.jpg'
           },
           {
             title: 'Gone with the Wind',
-            poster: '/4o1yeosjSFMaI9pe1rOkYcZ6hHO.jpg'
+            poster_path: '/4o1yeosjSFMaI9pe1rOkYcZ6hHO.jpg'
           }
         ];
       });
