@@ -3,14 +3,22 @@ import { shallow } from 'enzyme';
 import { User, mapDispatchToProps } from './User';
 
 describe('USER', () => {
-  it.skip('should match the snapshot', () => {
-    const wrapper = shallow(<User />);
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<User />);
+  });
+
+  it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should have default state ', () => {
+    expect(wrapper.state().password).toEqual('');
+    expect(wrapper.state().email).toEqual('');
   });
 
   describe('handleInput', () => {
     it('should setState of email', () => {
-      const wrapper = shallow(<User />);
       const expected = 'howdy';
       const mockEvent = {
         preventDefault: jest.fn(),
@@ -25,7 +33,6 @@ describe('USER', () => {
     });
 
     it('should setState of password', () => {
-      const wrapper = shallow(<User />);
       const expected = 'whats up doc';
       const mockEvent = {
         preventDefault: jest.fn(),
@@ -39,7 +46,6 @@ describe('USER', () => {
 
   describe('handleSubmit', () => {
     it('should prevent default', async () => {
-      const wrapper = shallow(<User />);
       const mockEvent = { preventDefault: jest.fn() };
       wrapper.instance().handleSubmit(mockEvent);
       expect(mockEvent.preventDefault).toHaveBeenCalled();
@@ -48,14 +54,13 @@ describe('USER', () => {
 
   describe('userReject', () => {
     it('should reset state to default if wrong password', () => {
-      const wrapper = shallow(<User />);
       const expected = { email: '', password: '' };
       wrapper.setState({ email: 'bar', password: 'foo' });
       wrapper.instance().userReject();
       expect(wrapper.state()).toEqual(expected);
     });
   });
-  
+
   describe('MDTP', () => {
     it('should call the dispatch function on MDTP', () => {
       const mockDispatch = jest.fn();

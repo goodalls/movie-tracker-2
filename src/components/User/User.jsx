@@ -63,8 +63,6 @@ export class User extends Component {
   }
 }
 
-export const mapStateToProps = store => ({});
-
 export const mapDispatchToProps = dispatch => ({
   logIn: user => dispatch(logIn(user))
 });
@@ -74,4 +72,4 @@ User.propTypes = {
   history: PropTypes.object
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));
+export default withRouter(connect(null, mapDispatchToProps)(User));
