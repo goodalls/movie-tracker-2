@@ -16,6 +16,7 @@ describe('NEW_USER', () => {
   })
     
   describe('handleInput', () => {
+    //defaults to an empty state
     describe('when given a key event', () => {
       let event;
       
@@ -69,14 +70,18 @@ describe('NEW_USER', () => {
           password: 'chicken123',
         }
 
-        let api.createUser();
+        let event;
       })
 
 
       it('should call createUser with expected params', () => {
-        api.createUser() = jest.fn();
-        handleSubmit(event);
-        expect(api.createUser()).toHaveBeenCalledWith(wrapper.state)
+
+        event = 'click';
+        api.createUser = jest.fn();
+
+        wrapper.handleSubmit(event);
+
+        expect(api.createUser()).toHaveBeenCalledWith(wrapper.state);
       })
       it('should call logIn with expected params', () => {
 
