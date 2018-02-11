@@ -12,7 +12,7 @@ describe('APP', () => {
   it('should define movies props for the container', () => {
     const title = 'RockyIV';
     const poster = '/jeffIsGreat';
-    const mockStore = { movieData: [{ title, poster }] };
+    const mockStore = { movies: [{ title, poster }] };
     const expected = [{ poster: '/jeffIsGreat', title: 'RockyIV' }];
     const mapped = mapStateToProps(mockStore);
     expect(mapped.movies).toEqual(expected);
