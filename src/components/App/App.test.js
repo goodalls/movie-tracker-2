@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { App, mapDispatchToProps, mapStateToProps } from './App';
 import { shallow } from 'enzyme';
-
-// import apiCalls, { mockApiCalls } from '../../apiCalls.js';
-// jest.mock('../../apiCalls.js');
 
 describe('APP', () => {
   it.skip('should match the snapshot', () => {
@@ -12,27 +9,27 @@ describe('APP', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it.skip('should fetchMovies', async () => {
-    const wrapper = shallow(<App />);
-    api.fetchParse = jest.fn();
-    const mockUrl = 'http://mock.com';
-    wrapper.instance().fetchMovies();
-    expect(wrapper.instance().api.fetchParse()).toHaveBeenCalled();
-  });
-
-  it.skip('should map the store correctly', () => {
-    const wrapper = shallow(<App />);
+  it('should define movies props for the container', () => {
     const title = 'RockyIV';
     const poster = '/jeffIsGreat';
     const mockStore = { movieData: [{ title, poster }] };
-    const mapped = wrapper.mapStateToProps(mockStore);
-    expect(mapped.movieData).toEqual({ title, poster });
+    const expected = [{ poster: '/jeffIsGreat', title: 'RockyIV' }];
+    const mapped = mapStateToProps(mockStore);
+    expect(mapped.movies).toEqual(expected);
   });
 
-  it.skip('should call the dispatch function on MDTP', () => {
-    const wrapper = shallow(<App />);
+  it('should define user props for the container', () => {
+    const id = 0;
+    const name = 'jeffIsGreat';
+    const mockStore = { user: {id, name} };
+    const expected = { id: 0, name: 'jeffIsGreat' };
+    const mapped = mapStateToProps(mockStore);
+    expect(mapped.user).toEqual(expected);
+  });
+
+  it('should call the dispatch function on MDTP', () => {
     const mockDispatch = jest.fn();
-    const mapped = wrapper.mapDispatchToProps(mockDispatch);
+    const mapped = mapDispatchToProps(mockDispatch);
     mapped.addMovies();
     expect(mockDispatch).toHaveBeenCalled();
   });

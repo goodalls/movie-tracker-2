@@ -5,16 +5,36 @@ export const addMovies = movies => {
   };
 };
 
-export const logIn = userObject => {
+export const logIn = user => {
   return {
     type: 'LOG_IN',
-    userObject
+    user
   };
 };
 
-export const createUser = userObject => {
+export const logOut = () => {
   return {
-    type: 'CREATE_USER',
-    userObject
-  }
-}
+    type: 'LOG_OUT'
+  };
+};
+
+export const addFavorite = favorite => {
+  return {
+    type: 'ADD_FAVORITE',
+    favorite
+  };
+};
+
+export const removeFavorite = unFavorite => {
+  return {
+    type: 'REMOVE_FAVORITE',
+    unFavorite
+  };
+};
+
+export const populateFavorites = favorites => {
+  return {
+    type: 'POPULATE_FAVORITES',
+    favorites
+  };
+};

@@ -9,7 +9,7 @@ import User from '../User/User';
 import NewUser from '../NewUser/NewUser';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
   constructor() {
     super();
     this.state = {};
@@ -54,12 +54,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = store => ({
+export const mapStateToProps = store => ({
   movies: store.movieData,
   user: store.user
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   addMovies: movies => dispatch(addMovies(movies))
 });
 
