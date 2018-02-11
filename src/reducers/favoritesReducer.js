@@ -1,7 +1,7 @@
 const favorites = (state = [], action) => {
   switch (action.type) {
     case 'POPULATE_FAVORITES':
-      return action.favorites;
+      return [...action.favorites];
     case 'ADD_FAVORITE': 
       return [...state, action.favorite];
     case 'REMOVE_FAVORITE': 

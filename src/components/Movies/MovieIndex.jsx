@@ -2,34 +2,41 @@ import React, { Component } from 'react';
 import Card from '../Card/Card';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { addFavorite } from '../../actions/actions';
+import * as api from '../../apiCalls';
+import { populateFavorites } from '../../actions/actions';
 
 import './MovieIndex.css';
 import PropTypes from 'prop-types';
 
 export class MovieIndex extends Component {
+  
+  componentDidMount = async () => {
+    if (this.props.user.id) {
+      this.updateFavorites();
+    }
+  }
 
-  handleClick = (event) => {
-    const { favorites, movies, user, addFavorite } = this.props;
+  updateFavorites = async () => {
+    const favorites = await api.fetchAllFavorites(this.props.user.id);
+    this.props.populateFavorites(favorites)
+  }
+
+  handleClick = async (event) => {
+    const { movies, user, favorites } = this.props;
     const user_id = user.id;
     const { id } = event.target;
-    if (!favorites) {
-      movies.find(movie => movie.movie_id === parseInt(id))
-    }
-
-    //add or remove from favorites array 
-    //use our actions which are add and remove
-    //compare movie_id to favorites array to see which action
-    // conditional to decide whether to dispatch ADD or REMOVE
-    //CHECK TO SEe if it's in the favorites array
-    //if it's in there we remove
-    //if it's not we add
-    // Add Favorite - /users/favorites/new
-    // To save a favorite you must send into the 
-    // body: movie_id, user_id and title, poster_path, 
-    // release_date, vote_average, overview. 
-    // Keep in mind the response only gives the new favorite id
+    const clicked = movies.find(movie => movie.movie_id === parseInt(id))
+    const movie = Object.assign({}, {...clicked}, {user_id})
+    if (!favorites.find(movie => movie.movie_id === parseInt(id))) {
+      const response = await api.addFavorite(movie)
+      console.log('response to api.addFav' + response)
+    } else {
+      const response = await api.removeFavorite(movie)
+      console.log(response)
+    } 
+    this.updateFavorites();
   }
+
 
   movieCards = () => {
     const { movies } = this.props;
@@ -47,16 +54,19 @@ export class MovieIndex extends Component {
 
 const mapStateToProps = state => ({
   movies: state.movies, 
-  favorites: state.favorites, 
-  user: state.user
+  user: state.user, 
+  favorites: state.favorites
 });
 
 const mapDispatchToProps = dispatch => ({
-  addFavorite: movie => dispatch(addFavorite(movie)) 
+  populateFavorites: favorites => dispatch(populateFavorites(favorites))
 })
 
 MovieIndex.propTypes = {
-  movies: PropTypes.array
+  movies: PropTypes.array, 
+  user: PropTypes.object,
+  favorites: PropTypes.array, 
+  populateFavorites: PropTypes.func
 };
 
-export default withRouter(connect(mapStateToProps, null)(MovieIndex));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MovieIndex));
