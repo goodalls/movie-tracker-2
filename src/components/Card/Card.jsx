@@ -12,6 +12,7 @@ const Card = ({ title, poster }) => {
         src={`https://image.tmdb.org/t/p/w500/${poster}`}
         alt={`${title} movie poster`}
       />
+      <button>Favorite</button>
     </div>
   );
 };

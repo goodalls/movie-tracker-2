@@ -18,7 +18,8 @@ export const movieCleaner = movies => {
   return movies.results.map(movie => {
     return {
       title: movie.title,
-      poster: movie.poster_path
+      poster: movie.poster_path, 
+      id: movie.id
     };
   });
 

@@ -17,14 +17,12 @@ export class MovieIndex extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     moviesData: state.movieData
-  };
-};
+});
 
 MovieIndex.propTypes = {
   moviesData: PropTypes.array
 };
 
-export default connect(mapStateToProps)(MovieIndex);
+export default connect(mapStateToProps, null)(MovieIndex);
