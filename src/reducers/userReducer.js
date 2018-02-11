@@ -1,9 +1,9 @@
 const user = (state = {},  action) => {
   switch (action.type) {
   case 'LOG_IN':
-    return action.userObject;
-  // case 'CREATE_USER':
-  //   return action.userObject;
+    return action.user;
+  case 'LOG_OUT':
+    return {};  
   default:
     return state;
   }
