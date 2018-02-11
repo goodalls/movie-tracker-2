@@ -1,30 +1,106 @@
 import React from 'react';
-import NewUser from './NewUser';
-import { shallow } from 'enzyme';
+import {NewUser} from './NewUser';
+import { shallow, mount } from 'enzyme';
+import * as api from '../../apiCalls'
 
 describe('NEW_USER', () => {
-  it.skip('should match the snapshot', () => {
-    const wrapper = shallow(<NewUser />);
-    expect(wrapper).toMatchSnapshot();
+  let wrapper;
+  beforeEach( () => {
+    wrapper = shallow(<NewUser />); 
+  })
+
+  describe('when rendered', () => {
+    it.skip('should match the snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  })
+    
+  describe('handleInput', () => {
+    describe('when given a key event', () => {
+      let event;
+      
+      it('should update the state with name', () => {  
+        expect(wrapper.state('name')).toEqual('')
+        event = {
+          target: {
+            value: 'Nora',
+            name: 'name'
+          }
+        }
+        wrapper.instance().handleInput(event);
+        expect(wrapper.state('name')).toEqual('Nora')
+      });
+
+      it('should update the state with email', () => {  
+        expect(wrapper.state('email')).toEqual('')
+        event = {
+          target: {
+            value: 'nora@gmail.com',
+            name: 'email'
+          }
+        }
+        wrapper.instance().handleInput(event);
+        expect(wrapper.state('email')).toEqual('nora@gmail.com')
+      });
+
+      it('should update the state with password', () => {  
+        expect(wrapper.state('password')).toEqual('')
+        event = {
+          target: {
+            value: 'chicken123',
+            name: 'password'
+          }
+        }
+        wrapper.instance().handleInput(event);
+        expect(wrapper.state('password')).toEqual('chicken123')
+      });
+
+    })
+    
   });
 
-  describe('handleInput', () => {
-    it('should', () => {
-    
-    });
-  });
-  
   describe('handleSubmit', () => {
-    it('should', () => {
-    
-    });
+    describe('when passed a state of new name, email, and password', () => {
+
+      beforeAll( () => {
+        wrapper.state = {
+          name: 'Nora',
+          email: 'nora@gmail.com',
+          password: 'chicken123',
+        }
+
+        let api.createUser();
+      })
+
+
+      it('should call createUser with expected params', () => {
+        api.createUser() = jest.fn();
+        handleSubmit(event);
+        expect(api.createUser()).toHaveBeenCalledWith(wrapper.state)
+      })
+      it('should call logIn with expected params', () => {
+
+      })
+      it('should redirect the user to the home page', () => {
+
+      })
+    })
+    describe('when given an email already in the database', () => {
+      it('should send and alert', () => {
+
+      })
+      it('should call setState with empty strings', () => {
+
+      })
+    })
+
   });
   
   // describe('MSTP', () => {
   //   it('should', () => {});
   // });
 
-  describe('MDTP', () => {
+  describe.skip('MDTP', () => {
     it('should', () => {});
   });
 });
