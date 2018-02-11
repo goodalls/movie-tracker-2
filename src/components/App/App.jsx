@@ -15,7 +15,6 @@ export class App extends Component {
     this.state = {};
   }
 
-
   componentDidMount = async () => {
     this.fetchMovies();
   };
