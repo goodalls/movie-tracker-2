@@ -45,11 +45,10 @@ export const logIn = async user => {
     });
     const parsed = await response.json();
     if (response.ok) {
-      console.log(parsed);
       return parsed.data;
     }
   } catch (error) {
-    return false;
+    return "Error in logIn";
   }
 };
 
@@ -65,8 +64,7 @@ export const createUser = async user => {
       return parsed;
     }
   } catch (error) {
-    console.log('error block');
-    return false;
+    return "Error in createUser";
   }
 };
 
@@ -78,13 +76,11 @@ export const addFavorite = async (movie) => {
       headers: { 'Content-Type': 'application/json' }
     })
     const parsed = await response.json();
-    if(response.ok) {
-      console.log(parsed)
+    if (response.ok) {
       return parsed;
     }
   } catch (error) {
-    console.log('error addFavorite');
-    return false;
+    return 'Error in addFavorite';
   }   
 }
 
@@ -101,13 +97,17 @@ export const removeFavorite = async (movie) => {
       return parsed;
     }
   } catch (error) {
-    console.log('error removeFavorite');
-    return false;
+    return 'Error in removeFavorite';
   }   
 }
 
 export const fetchAllFavorites = async (userId) => {
-  const response = await fetch(`api/users/${userId}/favorites`)
-  const favorites = await response.json()
-  return favorites.data
+  try {
+    const response = await fetch(`api/users/${userId}/favorites`)
+    const favorites = await response.json()
+    return favorites.data
+  } catch(error) {
+      return 'Error in fetchAllFavorites';
+  }
+  
 }
