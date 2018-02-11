@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { User } from './User';
+import { User, mapDispatchToProps } from './User';
 
 describe('USER', () => {
   it.skip('should match the snapshot', () => {
@@ -38,27 +38,34 @@ describe('USER', () => {
   });
 
   describe('handleSubmit', () => {
-    it.skip('should', async () => {
-      mockEvent = { preventDefault: jest.fn() };
+    it('should prevent default', async () => {
+      const wrapper = shallow(<User />);
+      const mockEvent = { preventDefault: jest.fn() };
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(mockEvent.preventDefault).toHaveBeenCalled();
     });
-  });
 
-  describe('MSTP', () => {
-    it.skip('should define user props for the container MSTP', () => {
-      const id = 0;
-      const name = 'jeffIsGreat';
-      const mockStore = { user: { id, name } };
-      const expected = { id: 0, name: 'jeffIsGreat' };
-      const mapped = mapStateToProps(mockStore);
-      expect(mapped.user).toEqual(expected);
+    it('should reset state to default if wrong password', () => {
+      const wrapper = shallow(<User />);
+      window.fetch = jest.fn().mockImplementation(() =>
+        Promise.reject({
+          status: 404,
+          json: () => Promise.reject()
+        })
+      );
+      const expected = { email: '', password: '' };
+      const mockEvent = { preventDefault: jest.fn() };
+      wrapper.setState({ email: 'bar', password: 'foo' });
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(wrapper.state()).toEqual(expected);
     });
   });
 
   describe('MDTP', () => {
-    it.skip('should call the dispatch function on MDTP', () => {
+    it('should call the dispatch function on MDTP', () => {
       const mockDispatch = jest.fn();
       const mapped = mapDispatchToProps(mockDispatch);
-      mapped.addMovies();
+      mapped.logIn();
       expect(mockDispatch).toHaveBeenCalled();
     });
   });

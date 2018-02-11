@@ -59,9 +59,9 @@ export class User extends Component {
   }
 }
 
-const mapStateToProps = store => ({});
+export const mapStateToProps = store => ({});
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   logIn: user => dispatch(logIn(user))
 });
 
