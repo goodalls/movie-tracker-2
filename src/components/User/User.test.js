@@ -44,23 +44,18 @@ describe('USER', () => {
       wrapper.instance().handleSubmit(mockEvent);
       expect(mockEvent.preventDefault).toHaveBeenCalled();
     });
+  });
 
+  describe('userReject', () => {
     it('should reset state to default if wrong password', () => {
       const wrapper = shallow(<User />);
-      window.fetch = jest.fn().mockImplementation(() =>
-        Promise.reject({
-          status: 404,
-          json: () => Promise.reject()
-        })
-      );
       const expected = { email: '', password: '' };
-      const mockEvent = { preventDefault: jest.fn() };
       wrapper.setState({ email: 'bar', password: 'foo' });
-      wrapper.instance().handleSubmit(mockEvent);
+      wrapper.instance().userReject();
       expect(wrapper.state()).toEqual(expected);
     });
   });
-
+  
   describe('MDTP', () => {
     it('should call the dispatch function on MDTP', () => {
       const mockDispatch = jest.fn();

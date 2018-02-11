@@ -27,10 +27,14 @@ export class User extends Component {
       this.props.logIn(user);
       this.props.history.push('/');
     } else {
-      alert('WRONG PASSWORD');
-      this.setState({ email: '', password: '' });
+      this.userReject();
     }
   };
+
+  userReject = () => {
+    alert('WRONG PASSWORD');
+    this.setState({ email: '', password: '' });
+  }
 
   render() {
     return (
