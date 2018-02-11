@@ -27,10 +27,14 @@ export class User extends Component {
       this.props.logIn(user);
       this.props.history.push('/');
     } else {
-      alert('WRONG PASSWORD');
-      this.setState({ email: '', password: '' });
+      this.userReject();
     }
   };
+
+  userReject = () => {
+    alert('WRONG PASSWORD');
+    this.setState({ email: '', password: '' });
+  }
 
   render() {
     return (
@@ -59,9 +63,7 @@ export class User extends Component {
   }
 }
 
-const mapStateToProps = store => ({});
-
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   logIn: user => dispatch(logIn(user))
 });
 
@@ -70,4 +72,4 @@ User.propTypes = {
   history: PropTypes.object
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));
+export default withRouter(connect(null, mapDispatchToProps)(User));
