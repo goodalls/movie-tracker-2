@@ -63,7 +63,7 @@ export const mapDispatchToProps = dispatch => ({
 
 Favorites.propTypes = {
   user: PropTypes.object,
-  populateFavorites: PropTypes.object,
+  populateFavorites: PropTypes.func,
   favorites: PropTypes.array
 };
 export default withRouter(

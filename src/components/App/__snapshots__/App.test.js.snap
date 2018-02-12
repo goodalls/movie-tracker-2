@@ -5,9 +5,11 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <App
+    favorites={Array []}
+    movies={Array []}
     user={
         Object {
-            "id": "hola",
+            "id": 0,
           }
     }
 />,
@@ -62,14 +64,6 @@ ShallowWrapper {
           >
                     Sign out
           </NavLink>
-          <NavLink
-                    activeClassName="active"
-                    ariaCurrent="true"
-                    className="nav"
-                    to="/favorites"
-          >
-                    Favorites
-          </NavLink>
 </header>,
         <Route
           component={[Function]}
@@ -89,7 +83,7 @@ ShallowWrapper {
           path="/favorites"
 />,
       ],
-      "className": "wrapper",
+      "className": "App",
     },
     "ref": null,
     "rendered": Array [
@@ -134,14 +128,7 @@ ShallowWrapper {
 >
               Sign out
 </NavLink>,
-            <NavLink
-              activeClassName="active"
-              ariaCurrent="true"
-              className="nav"
-              to="/favorites"
->
-              Favorites
-</NavLink>,
+            null,
           ],
           "className": "header",
         },
@@ -220,21 +207,7 @@ ShallowWrapper {
             "rendered": "Sign out",
             "type": [Function],
           },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "activeClassName": "active",
-              "ariaCurrent": "true",
-              "children": "Favorites",
-              "className": "nav",
-              "to": "/favorites",
-            },
-            "ref": null,
-            "rendered": "Favorites",
-            "type": [Function],
-          },
+          null,
         ],
         "type": "header",
       },
@@ -335,14 +308,6 @@ ShallowWrapper {
             >
                         Sign out
             </NavLink>
-            <NavLink
-                        activeClassName="active"
-                        ariaCurrent="true"
-                        className="nav"
-                        to="/favorites"
-            >
-                        Favorites
-            </NavLink>
 </header>,
           <Route
             component={[Function]}
@@ -362,7 +327,7 @@ ShallowWrapper {
             path="/favorites"
 />,
         ],
-        "className": "wrapper",
+        "className": "App",
       },
       "ref": null,
       "rendered": Array [
@@ -407,14 +372,7 @@ ShallowWrapper {
 >
                 Sign out
 </NavLink>,
-              <NavLink
-                activeClassName="active"
-                ariaCurrent="true"
-                className="nav"
-                to="/favorites"
->
-                Favorites
-</NavLink>,
+              null,
             ],
             "className": "header",
           },
@@ -493,21 +451,7 @@ ShallowWrapper {
               "rendered": "Sign out",
               "type": [Function],
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "function",
-              "props": Object {
-                "activeClassName": "active",
-                "ariaCurrent": "true",
-                "children": "Favorites",
-                "className": "nav",
-                "to": "/favorites",
-              },
-              "ref": null,
-              "rendered": "Favorites",
-              "type": [Function],
-            },
+            null,
           ],
           "type": "header",
         },
@@ -570,6 +514,7 @@ ShallowWrapper {
         "enableComponentDidUpdateOnSetState": true,
       },
     },
+    "disableLifecycleMethods": true,
   },
 }
 `;
