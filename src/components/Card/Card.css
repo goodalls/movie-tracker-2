@@ -1,3 +1,7 @@
 .Card {
   height: 250px;
 }
+
+.favorite {
+  border: 2px solid red;
+}

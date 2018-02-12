@@ -5,20 +5,15 @@ import * as api from '../../apiCalls';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
-import './MovieIndex.css';
+import MovieIndex from '../Movies/MovieIndex'
+import './Favorites.css';
 
-export class MovieIndex extends Component {
-  componentDidMount = async () => {
-    if (this.props.user.id) {
-      this.updateFavorites();
-    }
-  };
-
+export class Favorites extends Component {
   updateFavorites = async () => {
     const favorites = await api.fetchAllFavorites(this.props.user.id);
     this.props.populateFavorites(favorites);
   };
-
+  
   handleClick = async event => {
     const { movies, user, favorites } = this.props;
     const user_id = user.id;
@@ -38,25 +33,27 @@ export class MovieIndex extends Component {
     this.updateFavorites();
   };
 
-  movieCards = () => {
-    const { movies, favorites } = this.props;
-    return movies.map(movie => {
-      const favorite = favorites.map(favorite => favorite.movie_id).includes(movie.movie_id) ? 'favorite' : '';
+  render() 
+
+  {
+    const { favorites } = this.props;
+
+  const favoriteCards = favorites.map(movie => {
       return (
         <Card
           movie={movie}
-          favorite={favorite}
+          favorite='favorite'
           handleClick={this.handleClick}
           key={movie.movie_id}
         />
       );
     });
-  };
-
-  render() {
-    return <div className="movie-index">{this.movieCards()}</div>;
-  }
-}
+    return ( 
+      <div className="movie-index">
+        { favoriteCards }
+      </div>
+    )}
+};
 
 export const mapStateToProps = state => ({
   movies: state.movies,
@@ -68,13 +65,7 @@ export const mapDispatchToProps = dispatch => ({
   populateFavorites: favorites => dispatch(populateFavorites(favorites))
 });
 
-MovieIndex.propTypes = {
-  movies: PropTypes.array,
-  user: PropTypes.object,
-  favorites: PropTypes.array,
-  populateFavorites: PropTypes.func
-};
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(MovieIndex)
+  connect(mapStateToProps, mapDispatchToProps)(Favorites)
 );
