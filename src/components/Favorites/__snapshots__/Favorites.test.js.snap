@@ -22,7 +22,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": Array [],
-      "className": "movie-index",
+      "className": "favorites",
     },
     "ref": null,
     "rendered": Array [],
@@ -35,7 +35,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": Array [],
-        "className": "movie-index",
+        "className": "favorites",
       },
       "ref": null,
       "rendered": Array [],

@@ -60,6 +60,7 @@ ShallowWrapper {
                 type="submit"
         />
 </form>,
+      "className": "NewUser",
     },
     "ref": null,
     "rendered": Object {
@@ -249,6 +250,7 @@ ShallowWrapper {
                     type="submit"
           />
 </form>,
+        "className": "NewUser",
       },
       "ref": null,
       "rendered": Object {
