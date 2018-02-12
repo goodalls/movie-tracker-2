@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import movies from './movieReducer';
 import user from './userReducer';
 import favorites from './favoritesReducer';
@@ -66,12 +68,18 @@ describe('Reducers', () => {
     });
 
     it('should remove an un-favorited movie from the favorites array in the store via REMOVE_FAVORITE', () => {
-      const mockUnFav = { title: 'The Thin Man', poster: 'thinMan.jpg', movie_id: 2 };
+      const mockUnFav = {
+        title: 'The Thin Man',
+        poster: 'thinMan.jpg',
+        movie_id: 2
+      };
       const mockState = [
         { title: 'Dead Man', poster: 'deadMan.jpg', movie_id: 1 },
         { title: 'The Thin Man', poster: 'thinMan.jpg', movie_id: 2 }
       ];
-      const expected = [{ title: 'Dead Man', poster: 'deadMan.jpg', movie_id: 1 }];
+      const expected = [
+        { title: 'Dead Man', poster: 'deadMan.jpg', movie_id: 1 }
+      ];
       expect(favorites(mockState, actions.removeFavorite(mockUnFav))).toEqual(
         expected
       );

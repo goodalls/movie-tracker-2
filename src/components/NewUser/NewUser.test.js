@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { NewUser, mapDispatchToProps } from './NewUser';
 import { shallow } from 'enzyme';
@@ -9,7 +10,7 @@ describe('NEW_USER', () => {
   });
 
   describe('when rendered', () => {
-    it.skip('should match the snapshot', () => {
+    it('should match the snapshot', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -58,9 +59,6 @@ describe('NEW_USER', () => {
 
   describe('handleSubmit', () => {
     let mockEvent;
-    let url;
-    let mockFetchParams;
-    let mockData;
     let expected;
 
     describe('when passed a state of new name, email, and password', () => {

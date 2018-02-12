@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { User, mapDispatchToProps } from './User';
@@ -83,7 +84,6 @@ describe('USER', () => {
         );
       const mockState = { password: 'suh', email: 'dude@dude.com' };
       const mockEvent = { preventDefault: jest.fn() };
-      const expected = { id: 0, password: 'suh', email: 'dude@dude.com', name: 'jhun' };
       wrapper.setState(mockState);
       wrapper.instance().handleSubmit(mockEvent);
       expect(wrapper.props().logIn).toHaveBeenCalled();

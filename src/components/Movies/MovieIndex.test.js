@@ -5,20 +5,28 @@ import * as api from '../../apiCalls';
 
 describe('MOVIE_INDEX', () => {
   it('should match the snapshot', () => {
-    const wrapper = shallow(<MovieIndex movies={[]} user={{}} favorites={[]} />);
+    const wrapper = shallow(
+      <MovieIndex movies={[]} user={{}} favorites={[]} />
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   describe('updateFavorites', () => {
     it('should call api.fetchAllFavorites once', () => {
-      const wrapper = shallow(<MovieIndex movies={[]} user={{}} favorites={[]} populateFavorites={jest.fn()}/>);
+      const wrapper = shallow(
+        <MovieIndex
+          movies={[]}
+          user={{}}
+          favorites={[]}
+          populateFavorites={jest.fn()}
+        />
+      );
       api.fetchAllFavorites = jest.fn();
       wrapper.instance().updateFavorites();
       wrapper.update();
       expect(api.fetchAllFavorites).toHaveBeenCalledTimes(1);
     });
   });
-  
 
   describe('MDTP and MSTP', () => {
     it('should define movies props for the container MSTP', () => {

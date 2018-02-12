@@ -1,7 +1,6 @@
 import React from 'react';
 import { App, mapDispatchToProps, mapStateToProps } from './App';
 import { shallow } from 'enzyme';
-import * as api from '../../apiCalls';
 
 describe('APP', () => {
   it.skip('should match the snapshot', () => {
