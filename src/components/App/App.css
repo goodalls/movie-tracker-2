@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,900');
+
+
 .App {
   display: flex;
   flex-direction: column;
@@ -11,26 +14,30 @@
 .header {
   background-color: red;
   height: 50px;
-  width: 100%;
 }
 
 .header h1 {
   text-decoration: off;
+  color: white;
   font-size: 1.5em;
   display: inline-block;
   margin: 10px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 800;
+  font-weight: 900;
 }
-
-/*h1 .movie {
-  color: brown;
-  font-size: 1.7em;
-}*/
 
 .nav {
   float: right;
   padding: 5px;
   margin: 10px;
-  text-decoration: off;
+  text-decoration: none;
+  color: black;
+}
+
+.nav:hover {
+  color: white;
+}
+
+.nav:active {
+  text-decoration: underline;
 }
