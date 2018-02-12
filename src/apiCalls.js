@@ -1,6 +1,8 @@
 import { key } from './key';
 
+/* eslint-disable */
 export const test = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=1`;
+/* eslint-enable */
 
 export const fetchParse = async url => {
   try {
@@ -48,7 +50,7 @@ export const logIn = async user => {
       return parsed.data;
     }
   } catch (error) {
-    return "Error in logIn";
+    return 'Error in logIn';
   }
 };
 
@@ -64,50 +66,49 @@ export const createUser = async user => {
       return parsed;
     }
   } catch (error) {
-    return "Error in createUser";
+    return 'Error in createUser';
   }
 };
 
-export const addFavorite = async (movie) => {
+export const addFavorite = async movie => {
   try {
-     const response = await fetch('api/users/favorites/new', { 
-      method: 'POST', 
+    const response = await fetch('api/users/favorites/new', {
+      method: 'POST',
       body: JSON.stringify(movie),
       headers: { 'Content-Type': 'application/json' }
-    })
+    });
     const parsed = await response.json();
     if (response.ok) {
       return parsed;
     }
   } catch (error) {
     return 'Error in addFavorite';
-  }   
-}
+  }
+};
 
-export const removeFavorite = async (movie) => {
+export const removeFavorite = async movie => {
   const { movie_id, user_id } = movie;
   try {
-     const response = await fetch(`api/users/${user_id}/favorites/${movie_id}`, { 
-      method: 'DELETE', 
+    const response = await fetch(`api/users/${user_id}/favorites/${movie_id}`, {
+      method: 'DELETE',
       body: JSON.stringify({ movie_id, user_id }),
       headers: { 'Content-Type': 'application/json' }
-    })
+    });
     const parsed = await response.json();
-    if(response.ok) {
+    if (response.ok) {
       return parsed;
     }
   } catch (error) {
     return 'Error in removeFavorite';
-  }   
-}
-
-export const fetchAllFavorites = async (userId) => {
-  try {
-    const response = await fetch(`api/users/${userId}/favorites`)
-    const favorites = await response.json()
-    return favorites.data
-  } catch(error) {
-      return 'Error in fetchAllFavorites';
   }
-  
-}
+};
+
+export const fetchAllFavorites = async userId => {
+  try {
+    const response = await fetch(`api/users/${userId}/favorites`);
+    const favorites = await response.json();
+    return favorites.data;
+  } catch (error) {
+    return 'Error in fetchAllFavorites';
+  }
+};

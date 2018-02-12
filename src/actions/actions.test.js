@@ -23,7 +23,7 @@ describe('ACTIONS', () => {
     const expected = {
       type: 'LOG_OUT'
     };
-    expect(actions.logOut()).toEqual(expected)
+    expect(actions.logOut()).toEqual(expected);
   });
 
   it('should create an ADD_FAVORITE action', () => {
@@ -40,8 +40,8 @@ describe('ACTIONS', () => {
     const expected = {
       type: 'REMOVE_FAVORITE',
       unFavorite: mockNotFav
-    }; 
-    expect(actions.removeFavorite(mockNotFav)).toEqual(expected)
+    };
+    expect(actions.removeFavorite(mockNotFav)).toEqual(expected);
   });
 
   it('should create an POPULATE_FAVORITES action', () => {
@@ -53,4 +53,3 @@ describe('ACTIONS', () => {
     expect(actions.populateFavorites(mockFavs)).toEqual(expected);
   });
 });
-

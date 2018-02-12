@@ -23,17 +23,15 @@ export class MovieIndex extends Component {
     const { movies, user, favorites } = this.props;
     const user_id = user.id;
     const { id } = event.target;
-    if (user_id === undefined){
+    if (user_id === undefined) {
       alert('Please log in or create an account');
     }
-    const clicked = movies.find(movie => movie.movie_id === parseInt(id));
+    const clicked = movies.find(movie => movie.movie_id === parseInt(id, 10));
     const movie = Object.assign({}, { ...clicked }, { user_id });
-    if (!favorites.find(movie => movie.movie_id === parseInt(id))) {
-      const response = await api.addFavorite(movie);
-      console.log('response to api.addFav' + response);
+    if (!favorites.find(movie => movie.movie_id === parseInt(id, 10))) {
+      await api.addFavorite(movie);
     } else {
-      const response = await api.removeFavorite(movie);
-      console.log(response);
+      await api.removeFavorite(movie);
     }
     this.updateFavorites();
   };
@@ -41,7 +39,11 @@ export class MovieIndex extends Component {
   movieCards = () => {
     const { movies, favorites } = this.props;
     return movies.map(movie => {
-      const favorite = favorites.map(favorite => favorite.movie_id).includes(movie.movie_id) ? 'favorite' : '';
+      const favorite = favorites
+        .map(favorite => favorite.movie_id)
+        .includes(movie.movie_id)
+        ? 'favorite'
+        : '';
       return (
         <Card
           movie={movie}

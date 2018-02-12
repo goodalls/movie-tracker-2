@@ -20,42 +20,43 @@ export class App extends Component {
     this.fetchMovies();
   };
 
-  componentWillReceiveProps = () => {
-    
-  }
-  
+  componentWillReceiveProps = () => {};
+
   fetchMovies = async () => {
     const movies = await api.fetchParse(api.test);
     const moviesArray = await api.movieCleaner(movies);
     await this.props.addMovies(moviesArray);
   };
 
-
   render() {
-    const {logOut, user } = this.props;
+    const { logOut, user } = this.props;
 
     return (
       <div className="wrapper">
         <header className="header">
-          <NavLink to="/" className="title"><h1>Movie Tracker</h1></NavLink>
+          <NavLink to="/" className="title">
+            <h1>Movie Tracker</h1>
+          </NavLink>
           <NavLink to="/login" className="nav">
             Sign in
           </NavLink>
           <NavLink to="/new-user" className="nav">
             Create an Account
           </NavLink>
-          <NavLink to="/login" className="nav" onClick={logOut} >
+          <NavLink to="/login" className="nav" onClick={logOut}>
             Sign out
           </NavLink>
 
-          { user.id ? <NavLink to="/favorites" className="nav" >
-                      Favorites
-                    </NavLink> : null }
+          {user.id ? (
+            <NavLink to="/favorites" className="nav">
+              Favorites
+            </NavLink>
+          ) : null}
         </header>
         <Route exact path="/" component={MovieIndex} />
         <Route path="/login" component={User} />
         <Route path="/new-user" component={NewUser} />
-        <Route path='/favorites' component={ Favorites } />
+        <Route path="/favorites" component={Favorites} />
       </div>
     );
   }
@@ -63,7 +64,7 @@ export class App extends Component {
 
 export const mapStateToProps = store => ({
   movies: store.movies,
-  user: store.user, 
+  user: store.user,
   favorites: store.favorites
 });
 
@@ -74,7 +75,10 @@ export const mapDispatchToProps = dispatch => ({
 
 App.propTypes = {
   addMovies: PropTypes.func,
-  logOut: PropTypes.func
+  logOut: PropTypes.func,
+  user: PropTypes.object,
+  movies: PropTypes.array,
+  favorites: PropTypes.array
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

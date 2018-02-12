@@ -5,7 +5,6 @@ import * as api from '../../apiCalls';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
-import MovieIndex from '../Movies/MovieIndex'
 import './Favorites.css';
 
 export class Favorites extends Component {
@@ -13,47 +12,40 @@ export class Favorites extends Component {
     const favorites = await api.fetchAllFavorites(this.props.user.id);
     this.props.populateFavorites(favorites);
   };
-  
+
   handleClick = async event => {
     const { movies, user, favorites } = this.props;
     const user_id = user.id;
     const { id } = event.target;
-    if (user_id === undefined){
+    if (user_id === undefined) {
       alert('Please log in or create an account');
     }
-    const clicked = movies.find(movie => movie.movie_id === parseInt(id));
+    const clicked = movies.find(movie => movie.movie_id === parseInt(id, 10));
     const movie = Object.assign({}, { ...clicked }, { user_id });
-    if (!favorites.find(movie => movie.movie_id === parseInt(id))) {
-      const response = await api.addFavorite(movie);
-      console.log('response to api.addFav' + response);
+    if (!favorites.find(movie => movie.movie_id === parseInt(id, 10))) {
+      await api.addFavorite(movie);
     } else {
-      const response = await api.removeFavorite(movie);
-      console.log(response);
+      await api.removeFavorite(movie);
     }
     this.updateFavorites();
   };
 
-  render() 
-
-  {
+  render() {
     const { favorites } = this.props;
 
-  const favoriteCards = favorites.map(movie => {
+    const favoriteCards = favorites.map(movie => {
       return (
         <Card
           movie={movie}
-          favorite='favorite'
+          favorite="favorite"
           handleClick={this.handleClick}
           key={movie.movie_id}
         />
       );
     });
-    return ( 
-      <div className="movie-index">
-        { favoriteCards }
-      </div>
-    )}
-};
+    return <div className="movie-index">{favoriteCards}</div>;
+  }
+}
 
 export const mapStateToProps = state => ({
   movies: state.movies,
@@ -65,7 +57,11 @@ export const mapDispatchToProps = dispatch => ({
   populateFavorites: favorites => dispatch(populateFavorites(favorites))
 });
 
-
+Favorites.propTypes = {
+  user: PropTypes.object,
+  populateFavorites: PropTypes.object,
+  favorites: PropTypes.array
+};
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Favorites)
 );
