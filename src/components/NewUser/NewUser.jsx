@@ -40,7 +40,7 @@ export class NewUser extends Component {
 
   render() {
     return (
-      <div>
+      <div className="NewUser">
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Name: </label>
           <input

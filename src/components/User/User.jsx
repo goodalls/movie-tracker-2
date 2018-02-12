@@ -38,7 +38,7 @@ export class User extends Component {
 
   render() {
     return (
-      <div>
+      <div className="User">
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="email">Email: </label>
           <input
