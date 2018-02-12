@@ -20,8 +20,6 @@ export class App extends Component {
     this.fetchMovies();
   };
 
-  componentWillReceiveProps = () => {};
-
   fetchMovies = async () => {
     const movies = await api.fetchParse(api.test);
     const moviesArray = await api.movieCleaner(movies);
