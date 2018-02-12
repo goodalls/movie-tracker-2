@@ -77,7 +77,7 @@ export const mapDispatchToProps = dispatch => ({
 
 NewUser.propTypes = {
   logIn: PropTypes.func,
-  history: PropTypes.array
+  history: PropTypes.object
 };
 
 export default withRouter(

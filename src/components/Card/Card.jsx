@@ -19,7 +19,9 @@ const Card = ({ movie, handleClick }) => {
 
 Card.propTypes = {
   title: PropTypes.string,
-  poster: PropTypes.string
+  poster: PropTypes.string,
+  movie: PropTypes.object,
+  handleClick: PropTypes.func
 };
 
 export default Card;
