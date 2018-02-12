@@ -17,7 +17,7 @@ export class App extends Component {
   }
 
   componentDidMount = async () => {
-    this.fetchMovies();
+    this.fetchMovies();       
   };
 
   fetchMovies = async () => {
