@@ -1,5 +1,5 @@
 import React from 'react';
-import {NewUser} from './NewUser';
+import { NewUser , mapDispatchToProps } from './NewUser';
 import { shallow, mount } from 'enzyme';
 import * as api from '../../apiCalls'
 
@@ -16,7 +16,6 @@ describe('NEW_USER', () => {
   })
     
   describe('handleInput', () => {
-    //defaults to an empty state
     describe('when given a key event', () => {
       let event;
       
@@ -61,51 +60,63 @@ describe('NEW_USER', () => {
   });
 
   describe('handleSubmit', () => {
-    describe('when passed a state of new name, email, and password', () => {
+      let mockEvent;
+      let url;
+      let mockFetchParams;
+      let mockData;
+      let expected
 
+    describe('when passed a state of new name, email, and password', () => {
       beforeAll( () => {
+
         wrapper.state = {
           name: 'Nora',
           email: 'nora@gmail.com',
           password: 'chicken123',
-        }
+        };
 
-        let event;
+       mockEvent = { preventDefault: jest.fn() }
       })
 
 
-      it('should call createUser with expected params', () => {
+      it('should call createUser', async() => {
+        // user = await JSON.stringify(wrapper.state);
 
-        event = 'click';
-        api.createUser = jest.fn();
+        window.fetch = await jest.fn().mockImplementation(() => {
+          return {status: "success", message: "New user created", id: 21}
+        }) 
+        
+        wrapper.instance().handleSubmit(mockEvent);
 
-        wrapper.handleSubmit(event);
-
-        expect(api.createUser()).toHaveBeenCalledWith(wrapper.state);
-      })
-      it('should call logIn with expected params', () => {
-
-      })
-      it('should redirect the user to the home page', () => {
-
+        expect(window.fetch).toHaveBeenCalled()
       })
     })
-    describe('when given an email already in the database', () => {
-      it('should send and alert', () => {
 
-      })
+    describe('when given an email already in the database', () => {
+ 
       it('should call setState with empty strings', () => {
 
+        expected = { name: '', email: '', password: '' };
+
+        wrapper.setState({ email: 'bar', password: 'foo' });
+        wrapper.instance().newUserError();
+
+        expect(wrapper.state()).toEqual(expected);
       })
     })
 
   });
-  
-  // describe('MSTP', () => {
-  //   it('should', () => {});
-  // });
 
-  describe.skip('MDTP', () => {
-    it('should', () => {});
-  });
+  
+  describe('MDTP', () => {
+    let mockDispatch;
+    let mapped;
+    it('should call the dispatch function on MDTP', () => {
+      mockDispatch = jest.fn();
+      mapped = mapDispatchToProps(mockDispatch);
+      mapped.logIn();
+      expect(mockDispatch).toHaveBeenCalled();
+    });
+
+  })  
 });
