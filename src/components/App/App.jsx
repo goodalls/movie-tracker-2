@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import User from '../User/User';
 import NewUser from '../NewUser/NewUser';
+import Favorites from '../Favorites/Favorites';
 import './App.css';
 
 export class App extends Component {
@@ -31,7 +32,7 @@ export class App extends Component {
 
 
   render() {
-    const {logOut} = this.props;
+    const {logOut, user } = this.props;
 
     return (
       <div className="wrapper">
@@ -46,10 +47,15 @@ export class App extends Component {
           <NavLink to="/login" className="nav" onClick={logOut} >
             Sign out
           </NavLink>
+
+          { user.id ? <NavLink to="/favorites" className="nav" >
+                      Favorites
+                    </NavLink> : null }
         </header>
         <Route exact path="/" component={MovieIndex} />
         <Route path="/login" component={User} />
         <Route path="/new-user" component={NewUser} />
+        <Route path='/favorites' component={ Favorites } />
       </div>
     );
   }
