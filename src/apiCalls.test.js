@@ -207,18 +207,20 @@ describe('apiCalls', () => {
     });
 
     it('it returns an error if the request is unsuccessful', () => {
-      window.fetch = jest.fn().mockImplementation(() =>
-        Promise.reject({
-          status: 404,
-          json: () => Promise.reject('Error in logIn')
-        })
-      );
+      window.fetch = jest
+        .fn()
+        .mockImplementation(() =>
+          Promise.reject({
+            status: 404,
+            json: () => Promise.reject('Error in createUser')
+          })
+        );
       const mockUser = { password: 'tacos', email: 'will@aol.com' }
       const expected = 'Error in createUser'
       const error = api.createUser(mockUser);
-      expect(error).resolves.toEqual(expected)
-    })
-  })
+      expect(error).resolves.toEqual(expected);
+    });
+  });
 
   describe('addFavorite', () => {
     beforeAll(() => {

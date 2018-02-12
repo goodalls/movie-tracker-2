@@ -22,7 +22,6 @@ export class NewUser extends Component {
   };
 
   handleSubmit = async event => {
-    console.log(this.props)
     event.preventDefault();
     const response = await api.createUser(this.state);
     if (response) {
@@ -30,12 +29,12 @@ export class NewUser extends Component {
       const credentials = Object.assign({}, {email}, {password});
       const user = await api.logIn(credentials);
       if (user) {
-        this.props.logIn(user)
+        this.props.logIn(user);
         this.props.history.push('/');
       }
     } else {
       alert('Email has already been used');
-      this.setState({name:'', email:'', password:''})
+      this.setState({name:'', email:'', password:''});
     }
   };
 
@@ -72,13 +71,13 @@ export class NewUser extends Component {
 }
 
   
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   logIn: user => dispatch(logIn(user))
 });
 
 NewUser.propTypes = {
   logIn: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.array
 };
 
 export default withRouter(
