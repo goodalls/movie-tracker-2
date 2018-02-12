@@ -47,7 +47,7 @@ export class Favorites extends Component {
     return (
       <div className="favorites">
         {favoriteCards}
-      </div>)
+      </div>);
   }
 }
 
