@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { User, mapDispatchToProps } from './User';
+import * as api from '../../apiCalls';
 
 describe('USER', () => {
   let wrapper;
@@ -46,9 +47,46 @@ describe('USER', () => {
 
   describe('handleSubmit', () => {
     it('should prevent default', async () => {
+      wrapper = shallow(<User logIn={jest.fn()} history={[]} />);
       const mockEvent = { preventDefault: jest.fn() };
       wrapper.instance().handleSubmit(mockEvent);
       expect(mockEvent.preventDefault).toHaveBeenCalled();
+    });
+
+    it('should login the user by sending state to api.logIn', () => {
+      wrapper = shallow(<User logIn={jest.fn()} history={[]} />);
+      api.logIn = jest.fn();
+      const mockState = { password: 'suh', email: 'dude@dude.com' };
+      const mockEvent = { preventDefault: jest.fn() };
+      wrapper.setState(mockState);
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(api.logIn).toHaveBeenCalledWith(mockState);
+    });
+
+    it.skip('should take the response from DB and send to store', () => {
+      wrapper = shallow(<User logIn={jest.fn()} history={[]} />);
+      api.logIn = jest
+        .fn()
+        .mockImplementation(() =>
+          Promise.resolve({
+            ok: true,
+            json: () =>
+              Promise.resolve({
+                data: {
+                  id: 0,
+                  password: 'suh',
+                  email: 'dude@dude.com',
+                  name: 'jhun'
+                }
+              })
+          })
+        );
+      const mockState = { password: 'suh', email: 'dude@dude.com' };
+      const mockEvent = { preventDefault: jest.fn() };
+      const expected = { id: 0, password: 'suh', email: 'dude@dude.com', name: 'jhun' };
+      wrapper.setState(mockState);
+      wrapper.instance().handleSubmit(mockEvent);
+      expect(wrapper.props().logIn).toHaveBeenCalled();
     });
   });
 
