@@ -191,7 +191,7 @@ describe('apiCalls', () => {
           headers: { 'Content-Type': 'application/json' }}
       api.createUser(mockUser);
       expect(window.fetch).toHaveBeenCalledWith(mockUrl, expectedRequestObj);
-    })
+    });
 
     it('should return a parsed object with a status of success', async () => {
       const mockUser = { password: 'badass', email: 'BAchristie@turing.io', name: 'Christie' }
@@ -204,7 +204,7 @@ describe('apiCalls', () => {
                         status :"success" }
       const user = await api.createUser(mockUser);
       expect(user).toEqual(expected)
-    })
+    });
 
     it('it returns an error if the request is unsuccessful', () => {
       window.fetch = jest.fn().mockImplementation(() =>

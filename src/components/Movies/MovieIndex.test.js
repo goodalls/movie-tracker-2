@@ -1,6 +1,7 @@
 import React from 'react';
 import { MovieIndex, mapStateToProps, mapDispatchToProps } from './MovieIndex';
 import { shallow } from 'enzyme';
+import * as api from '../../apiCalls';
 
 describe('MOVIE_INDEX', () => {
   it('should match the snapshot', () => {
@@ -8,26 +9,15 @@ describe('MOVIE_INDEX', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  // describe('updateFavorites', () => {
-  //   it('should call api once', () => {
-  //     const wrapper = shallow(<MovieIndex movies={[]} user={{}} favorites={[]} />);
-  //     const api = jest.fn();
-  //     window.fetch = jest
-  //       .fn()
-  //       .mockImplementation(() =>
-  //         Promise.resolve({
-  //           json: () =>
-  //             Promise.resolve({
-  //               hello: 'youFool'
-  //             })
-  //         })
-  //       );
-  //     wrapper.instance().updateFavorites();
-  //     wrapper.update();
-  //     expect(api).toHaveBeenCalledTimes(1);
-
-  //   });
-  // });
+  describe('updateFavorites', () => {
+    it('should call api.fetchAllFavorites once', () => {
+      const wrapper = shallow(<MovieIndex movies={[]} user={{}} favorites={[]} populateFavorites={jest.fn()}/>);
+      api.fetchAllFavorites = jest.fn();
+      wrapper.instance().updateFavorites();
+      wrapper.update();
+      expect(api.fetchAllFavorites).toHaveBeenCalledTimes(1);
+    });
+  });
   
 
   describe('MDTP and MSTP', () => {
