@@ -43,7 +43,11 @@ export class Favorites extends Component {
         />
       );
     });
-    return <div className="movie-index">{favoriteCards}</div>;
+
+    return (
+      <div className="favorites">
+        {favoriteCards}
+      </div>)
   }
 }
 

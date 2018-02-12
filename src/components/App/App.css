@@ -1,27 +1,36 @@
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  /*display: grid;
+  grid-template-columns: repeat(12, 1fr);*/
+  background-color: black;
 }
 
 .header {
-  grid-column: 1/13;
-  background-color: grey;
+  background-color: red;
   height: 50px;
+  width: 100%;
 }
 
 .header h1 {
-  text-decoration: cornsilk;
+  text-decoration: off;
   font-size: 1.5em;
   display: inline-block;
+  margin: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
 }
 
-h1 .movie {
+/*h1 .movie {
   color: brown;
   font-size: 1.7em;
-}
+}*/
 
 .nav {
   float: right;
-  border: 2px solid black;
   padding: 5px;
+  margin: 10px;
+  text-decoration: off;
 }

@@ -32,7 +32,7 @@ export class App extends Component {
     const { logOut, user } = this.props;
 
     return (
-      <div className="wrapper">
+      <div className="App">
         <header className="header">
           <NavLink to="/" className="title">
             <h1>Movie Tracker</h1>

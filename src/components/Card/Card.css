@@ -1,7 +1,47 @@
 .Card {
-  height: 250px;
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 280px;
+  margin: 20px;
+  width: 200px;
 }
 
 .favorite {
-  border: 2px solid red;
+  border: 2px solid white;
+  background-color: ghostwhite;
+  color: black;
+}
+
+h2 {
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif;
+  margin: 5px;
+}
+
+img {
+  width: 100%;
+  min-height: 100%;
+}
+
+button {
+  background-color: red;
+  color: white;
+  display: inline-block;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 0px;
+  height: 30px;
+  width: 90px;
+  padding: 10px 15px;
+  margin: -30px 5px 10px 5px;
+  z-index: 1;
+}
+
+button:hover {
+  background-color: purple;
+  box-shadow: 2px 2px 5px black;
 }

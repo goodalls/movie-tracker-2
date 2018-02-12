@@ -6,10 +6,7 @@ const Card = ({ movie, handleClick, favorite }) => {
   const { title, movie_id, poster_path } = movie;
   return (
     <article className={'Card ' + favorite} id={movie_id}>
-      <h2> {title} </h2>
-      <img
-        height="100"
-        width="100"
+      <img 
         src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
         alt={`${title} movie poster`}
       />
