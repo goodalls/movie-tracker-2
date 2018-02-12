@@ -4,7 +4,8 @@ import { shallow } from 'enzyme';
 
 describe('APP', () => {
   it('should match the snapshot', () => {
-    const wrapper = shallow(<App user={{id:0}} movies={[]} favorites= {[]}/>, {disableLifecycleMethods: true });
+    const wrapper = shallow(<App user={{id:0}} movies={[]} favorites= {[]}/>, 
+      {disableLifecycleMethods: true });
     expect(wrapper).toMatchSnapshot();
   });
 
