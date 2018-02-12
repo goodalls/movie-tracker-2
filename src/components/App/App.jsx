@@ -63,7 +63,8 @@ export class App extends Component {
 
 export const mapStateToProps = store => ({
   movies: store.movies,
-  user: store.user
+  user: store.user, 
+  favorites: store.favorites
 });
 
 export const mapDispatchToProps = dispatch => ({
