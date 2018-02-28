@@ -16,7 +16,7 @@ describe('apiCalls', () => {
             ])
         })
       );
-      mockUrl = 'http://mock.com';
+      mockUrl = 'http://mock.com';  
     });
 
     it('should call fetch with the expected params', () => {
